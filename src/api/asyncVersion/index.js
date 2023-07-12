@@ -29,6 +29,7 @@ export const putData = async (id, params) => {
     return await request({
       url: `${baseURL}${id}`,
       method: "put",
+      data: params,
     });
   } catch (error) {
     console.error(error);

@@ -3,6 +3,7 @@ import {
   getArticleList,
   delArticleData,
   udateArticleData,
+  addArticleData
 } from "../../../api/asyncVersion/article";
 import {
   Space,
@@ -39,14 +40,16 @@ export default function ArticleList() {
 
   //文章数据添加
   const addArticle = async () => {
-    const url = "http://localhost:8001/articles";
 
     const data = {
       title: `中国载人登月初步方案公布${+new Date()}`,
-      author: "王帆帆",
+      author: "g帆帆",
       describe: "",
     };
-    const { data: res } = await axios({ method: "post", url, data });
+    let res = await addArticleData(data);
+    console.log("文章数据更新", res);
+    getArticleData();
+    setVisible(false);
     console.log("res", res);
   };
 
@@ -60,10 +63,14 @@ export default function ArticleList() {
 
   //文章数据更新
   const updateData = async (data) => {
+    let res = await udateArticleData(rowid,{title:data.title});
+    console.log("文章数据更新", res);
+
     getArticleData();
     setVisible1(false);
-    console.log("datammmmmmmmmmmmmmmmmmmmmm", data);
-  };
+
+  }
+    
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
@@ -177,7 +184,7 @@ export default function ArticleList() {
             />
           </Form.Item>
 
-          <Button onClick={onClose1.bind(this)}>取消</Button>
+          <Button onClick={onClose.bind(this)}>取消</Button>
           <Button htmlType="submit" type="primary">
             完成
           </Button>
