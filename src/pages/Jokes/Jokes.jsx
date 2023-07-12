@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getJokesData } from "../../api/index";
+import { getJokesData } from "../../api/index1";
 import styleModule from "./Jokes.module.css";
 
 export default class Jokes extends Component {

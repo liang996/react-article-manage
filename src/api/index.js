@@ -1,27 +1,25 @@
-import instance from "../utils/request";
-// 天气列表查询
-export const getWeatherData = (params) => {
-    return instance.request({
-        url: "/api/forecast7d",
-        method: "GET",
-        params
-    });
-};
+import { request } from '../utils/request'
+ let  baseURL="/wen" 
 
-// 城市列表查询
-export const getCityData = (params) => {
-    return instance.request({
-        url: "/api/citylist",
-        method: "GET",
-        params
-    });
-};
+ export const  fetchData= async(url)=> {
+  try {
+    return await request({
+      url:  `${baseURL}${url}`,
+      method: 'get'
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
 
-// 段子数据
-export const getJokesData = (params) => {
-    return instance.request({
-        url: "/duanzi/ws/api.php",
-        method: "GET",
-        params
-    });
-};
+export const  postData=  async  (url,params)=> {
+  try {
+   return await request({
+      url: `${baseURL}${url}`,
+      method: 'post',
+      data:params
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
