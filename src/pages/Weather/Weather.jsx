@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getWeatherData, getCityData } from "../../api/index1";
+import { getWeatherData, getCityData } from "../../api/index";
 import styleModule from "./Weather.module.css";
 
 export default class Weather extends Component {

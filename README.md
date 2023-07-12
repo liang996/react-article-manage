@@ -66,7 +66,5 @@ npm install -g json-server
 3.启动 JSON 服务器
 
 ```js
-//3001端口不要与你已经开启的端口重复
-json-server --watch db.json --port 3001 
-
+npm run mock
 ```

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getArticleList } from "../../../api/article";
+import { getArticleList } from "../../../api/asyncVersion/article";
 import { message } from "antd";
 import axios from "axios";
 
@@ -31,7 +31,7 @@ export default function ArticleList() {
     const url = "http://localhost:8001/articles";
 
     const data = {
-      title: "中国载人登月初步方案公布",
+      title: `中国载人登月初步方案公布${+new Date()}`,
       author: "王帆帆",
       describe: "",
     };
