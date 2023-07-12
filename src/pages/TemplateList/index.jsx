@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import MenuHeader from "../../components/MenuHeader";
 import MenuList from "../../components/MenuList";
 import Jokes from "../Jokes/Jokes";
