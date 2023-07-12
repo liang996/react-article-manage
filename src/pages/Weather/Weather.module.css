@@ -1,0 +1,23 @@
+.wather {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.wather header {
+
+  text-align: center;
+
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.list li {
+  margin: 15px 30px;
+}
