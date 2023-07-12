@@ -39,5 +39,34 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-
 ## 目前持续开发中。。。。。。。。。。。。。。
+
+## JSON Server 使用
+
+1.安装 JSON 服务器
+
+```js
+npm install -g json-server
+```
+
+2.创建一个包含一些数据的 db.json 文件
+
+```js
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
+```
+
+3.启动 JSON 服务器
+
+```js
+//3001端口不要与你已经开启的端口重复
+json-server --watch db.json --port 3001 
+
+```

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Layout } from "antd";
+import { Menu, Layout ,message} from "antd";
 import { withRouter } from "react-router-dom";
-
+import { getMenuList } from "../../api/menu";
 import "./index.css";
-import { UserOutlined } from "@ant-design/icons";
 const { Sider } = Layout;
 
 function MenuList(props) {
@@ -11,55 +10,24 @@ function MenuList(props) {
   console.log("props", props);
   const [collapsed] = useState(false);
 
-  const MenulistData = [
-    {
-      label: "首页",
-      icon: <UserOutlined />,
-      key: "/home",
-    },
-    {
-      label: "天气管理",
-      icon: <UserOutlined />,
-      key: "/weather",
-    },
-
-    {
-      label: "文章管理",
-      icon: <UserOutlined />,
-      path: "/article-manage",
-      key: "2",
-      children: [
-        {
-          label: "文章列表",
-          icon: null,
-          key: "/article-manage/article/list",
-        },
-        {
-          label: "发布列表",
-          icon: null,
-          key: "/article-manage/release/list",
-        },
-        {
-          label: "审核列表",
-          icon: null,
-          key: "/article-manage/auditing/list",
-          // children: [],
-        },
-      ],
-    },
-  ];
   const [MenuData, setMenuData] = useState([]);
 
   useEffect(() => {
-    getMenuData();
+    getArticleData();
   }, []);
-  // 获取菜单数据
-  const getMenuData = () => {
-    setMenuData(MenulistData);
+
+  //请求文章数据
+  const getArticleData = () => {
+    getMenuList()
+      .then((res) => {
+        setMenuData(res.data)
+      })
+      .catch(() => {
+        message.error("获取文章数据失败");
+      });
   };
   const onClick = (e) => {
     console.log("click ", e);
-    //传递state参数
     props.history.push({
       pathname: e.key,
     });
