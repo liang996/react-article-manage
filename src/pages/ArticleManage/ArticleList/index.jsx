@@ -22,10 +22,11 @@ export default function ArticleList() {
 
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
+  const [seachValue, setSeachValue] = useState("");
+
   const [rowid, setRowid] = useState(null);
   let formRef1 = useRef();
   let formRef = useRef();
-
   useEffect(() => {
     getArticleData();
   }, []);
@@ -50,6 +51,8 @@ export default function ArticleList() {
     console.log("文章数据更新", res);
     getArticleData();
     setVisible(false);
+    formRef.current.resetFields() //修改成功后清空输入框中的数据
+
     console.log("res", res);
   };
 
@@ -68,6 +71,8 @@ export default function ArticleList() {
 
     getArticleData();
     setVisible1(false);
+ formRef1.current.resetFields() //修改成功后清空输入框中的数据
+
 
   }
     
@@ -81,17 +86,36 @@ export default function ArticleList() {
   const showDrawer = () => {
     setVisible(true);
   };
+
+  const  updateState = (e) => {
+    setSeachValue(e.target.value )
+  } //即时更新，不加这个就不会更新输入框内容
+  
+  
+
   //实现按照姓名查询数据
-  const queryfn = (e) => {
-    let keyword = e.target.value;
+  const queryfn = () => {
+
+
     clearTimeout(window.timer); //防抖查询
     window.timer = setTimeout(() => {
-      let data = articleData.filter((r) => r.title === keyword);
+      let data = articleData.filter((r) => r.title === seachValue);
       if (data.length !== 0) {
         setArticleData(data);
+      }else{
+        setArticleData([]);
+
       }
     }, 500);
   };
+
+    //输入框清空
+  const clear = (e) => {
+    setSeachValue("")
+    getArticleData();
+
+  };
+
 
   //显示修改信息抽屉
   const showDrawer1 = (r) => {
@@ -161,9 +185,13 @@ export default function ArticleList() {
       <Input
         placeholder="请根据文章标题查找信息"
         style={{ marginLeft: "10px", width: "20%" }}
-        onInput={queryfn}
+        value={seachValue} onChange={updateState} 
       />
+          <Button  onClick={clear} >重置</Button>
 
+      <Button type="primary" onClick={queryfn}>
+       查询
+      </Button>
       <Table columns={columns} dataSource={articleData} />
       <Drawer title="添加文章信息" onClose={onClose} visible={visible}>
         <Form
