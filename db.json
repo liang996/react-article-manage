@@ -154,15 +154,19 @@
       "key": "/home"
     },
     {
-      "label": "天气系统管理",
+      "label": "天气管理",
       "icon": null,
       "key": "/weather"
     },
     {
+      "label": "用户管理",
+      "icon": null,
+      "key": "/user"
+    },
+    {
       "label": "文章管理",
       "icon": null,
-      "path": "/article-manage",
-      "key": "2",
+      "key": "/article-manage",
       "children": [
         {
           "label": "文章列表",

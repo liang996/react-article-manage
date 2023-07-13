@@ -21,8 +21,8 @@ import { nanoid } from "nanoid";
 export default function ArticleList() {
   const [articleData, setArticleData] = useState([]);
 
-  const [visible, setVisible] = useState(false);
-  const [visible1, setVisible1] = useState(false);
+  const [addVisible, setaddVisible] = useState(false);
+  const [editaddVisible, seteditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
 
   const [rowid, setRowid] = useState(null);
@@ -67,7 +67,7 @@ export default function ArticleList() {
     let res = await addArticleData(data);
     console.log("文章数据更新", res);
     getArticleData();
-    setVisible(false);
+    setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
     console.log("res", res);
@@ -87,7 +87,7 @@ export default function ArticleList() {
     console.log("文章数据更新", res);
 
     getArticleData();
-    setVisible1(false);
+    seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
   };
 
@@ -98,7 +98,7 @@ export default function ArticleList() {
   };
   //显示新增信息抽屉
   const showDrawer = () => {
-    setVisible(true);
+    setaddVisible(true);
   };
 
   const updateState = (e) => {
@@ -126,7 +126,7 @@ export default function ArticleList() {
 
   //显示修改信息抽屉
   const showDrawer1 = (r) => {
-    setVisible1(true);
+    seteditAddVisible(true);
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
     setTimeout(() => {
@@ -136,13 +136,13 @@ export default function ArticleList() {
 
   //关闭修改信息对话框
   const onClose1 = () => {
-    setVisible1(false);
+    seteditAddVisible(false);
     message.error("取消操作");
   };
 
   //关闭新增信息对话框
   const onClose = () => {
-    setVisible(false);
+    setaddVisible(false);
 
     message.error("取消操作");
   };
@@ -207,7 +207,7 @@ export default function ArticleList() {
         </Button>
       </div>
       <Table columns={columns} dataSource={articleData} />
-      <Drawer title="添加文章信息" onClose={onClose} visible={visible}>
+      <Drawer title="添加文章信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}
           onFinish={addArticle}
@@ -228,7 +228,7 @@ export default function ArticleList() {
           </Button>
         </Form>
       </Drawer>
-      <Drawer title="修改文章信息" onClose={onClose1} visible={visible1}>
+      <Drawer title="修改文章信息" onClose={onClose1} open={editaddVisible}>
         <Form
           ref={formRef1}
           onFinish={updateData}
