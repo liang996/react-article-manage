@@ -70,7 +70,7 @@
   "articles": [
     {
       "id": 1,
-      "title": "文章类的数据表修改",
+      "title": "文章类的数据表修改111",
       "author": "张三",
       "usersId": 1,
       "describe": "json-server可以快速的模拟接口"
@@ -88,13 +88,6 @@
       "author": "王三",
       "usersId": 3,
       "describe": "新建一个文件夹，名字随意"
-    },
-    {
-      "id": 4,
-      "title": "仅1%年轻人月收入超过5万",
-      "author": "刘三",
-      "usersId": 4,
-      "describe": ""
     },
     {
       "id": 5,
@@ -146,42 +139,48 @@
       "id": 11
     }
   ],
-
   "menuLists": [
     {
       "label": "首页",
       "icon": null,
+      "auth":1,
       "key": "/home"
     },
     {
       "label": "天气管理",
       "icon": null,
-      "key": "/weather"
+      "key": "/weather",
+      "auth":1
     },
     {
       "label": "用户管理",
       "icon": null,
-      "key": "/user"
+      "key": "/user",
+      "auth":0
     },
     {
       "label": "文章管理",
       "icon": null,
       "key": "/article-manage",
+      "auth":1,
       "children": [
         {
           "label": "文章列表",
           "icon": null,
-          "key": "/article-manage/article/list"
+          "key": "/article-manage/article/list",
+          "auth":1
         },
         {
           "label": "发布列表",
           "icon": null,
-          "key": "/article-manage/release/list"
+          "key": "/article-manage/release/list",
+          "auth":1
         },
         {
           "label": "审核列表",
           "icon": null,
-          "key": "/article-manage/auditing/list"
+          "key": "/article-manage/auditing/list",
+          "auth":0
         }
       ]
     }

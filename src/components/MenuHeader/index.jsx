@@ -16,15 +16,11 @@ export default function MenuHeader() {
   };
 
   const onClick = ({ key }) => {
-    console.log('key', key)
-    if (key ==1) {
-      console.log('key111111111', key)
-
-      removeToken();
-      window.location.href = '/login'
-
-    }
-   
+    removeToken();
+    window.location.href = "/login";
+    // if (key ==1) {
+    //   console.log('key111111111', key)
+    // }
   };
 
   const items = [
