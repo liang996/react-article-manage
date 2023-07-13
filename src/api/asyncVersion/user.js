@@ -17,6 +17,6 @@ export const delUserData = (id) => {
 };
 
 //用户列表修改
-export const udateUserData = (id,params) => {
+export const updateUserData = (id,params) => {
     return patchData(`/users/${id}`,params)
 };

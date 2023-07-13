@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Menu, Layout } from "antd";
 import { withRouter } from "react-router-dom";
 import { getMenuList } from "../../api/asyncVersion/menu";
-import { isAuth } from "../../utils/common";
 import { UserOutlined, HomeOutlined, PicLeftOutlined } from "@ant-design/icons";
 import { WeatherIcon } from "../../utils/icon";
 

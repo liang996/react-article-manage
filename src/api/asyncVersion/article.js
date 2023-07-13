@@ -17,6 +17,6 @@ export const delArticleData = (id) => {
 };
 
 //文章列表修改
-export const udateArticleData = (id,params) => {
+export const updateArticleData = (id,params) => {
     return patchData(`/articles/${id}`,params)
 };

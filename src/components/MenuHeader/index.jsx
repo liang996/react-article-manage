@@ -3,7 +3,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
-import { Layout, Dropdown, Menu, Space, Avatar, message } from "antd";
+import { Layout, Dropdown,  Space, Avatar } from "antd";
 import React, { useState } from "react";
 import { removeToken } from "../../utils/common";
 

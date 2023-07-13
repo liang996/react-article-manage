@@ -146,48 +146,147 @@
       "id": 11
     }
   ],
+  "auths": [
+    {
+      "id": 1,
+      "title": "首页",
+      "key": "/home",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 2,
+      "title": "用户管理",
+      "key": "/user-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 3,
+      "title": "天气管理",
+      "key": "/weather-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 7,
+      "title": "权限管理",
+      "key": "/auth-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 14,
+      "title": "文章管理",
+      "key": "/article-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 21,
+      "title": "审核管理",
+      "key": "/examine-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    },
+    {
+      "id": 24,
+      "title": "发布管理",
+      "key": "/publish-manage",
+      "pagepermisson": 1,
+      "grade": 1
+    }
+  ],
   "menuLists": [
     {
+      "id": 1,
       "label": "首页",
       "icon": null,
-      "auth":1,
+      "auth": 1,
       "key": "/home"
     },
     {
+      "id": 2,
       "label": "天气管理",
       "icon": null,
-      "key": "/weather",
-      "auth":1
+      "key": "/weather-manage",
+      "auth": 1
     },
     {
+      "id": 3,
       "label": "用户管理",
       "icon": null,
-      "key": "/user",
-      "auth":1
+      "key": "/user-manage",
+      "auth": 1
     },
     {
+      "id": 4,
       "label": "文章管理",
       "icon": null,
       "key": "/article-manage",
-      "auth":1,
+      "auth": 1,
       "children": [
         {
+          "id": 1,
           "label": "文章列表",
           "icon": null,
           "key": "/article-manage/article/list",
-          "auth":1
-        },
+          "auth": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "label": "发布管理",
+      "icon": null,
+      "key": "/publish-manage",
+      "auth": 1,
+      "children": [
         {
+          "id": 1,
           "label": "发布列表",
           "icon": null,
-          "key": "/article-manage/release/list",
-          "auth":1
-        },
+          "key": "/publish-manage/publish/list",
+          "auth": 1
+        }
+      ]
+    },
+    {
+      "id":6,
+      "label": "审核管理",
+      "icon": null,
+      "key": "/examine-manage",
+      "auth": 1,
+      "children": [
         {
+          "id": 1,
           "label": "审核列表",
           "icon": null,
-          "key": "/article-manage/auditing/list",
-          "auth":0
+          "key": "/examine-manage/examine/list",
+          "auth": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "label": "权限管理",
+      "icon": null,
+      "key": "/auth-manage",
+      "auth": 1,
+      "children": [
+        {
+          "id": 1,
+          "label": "权限列表",
+          "icon": null,
+          "key": "/auth-manage/auth/List",
+          "auth": 1
+        },
+        {
+          "id": 2,
+          "label": "角色列表",
+          "icon": null,
+          "key": "/auth-manage/role/List",
+          "auth": 1
         }
       ]
     }

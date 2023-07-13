@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  getArticleList,
-  delArticleData,
-  updateArticleData,
-  addArticleData,
+  getAuthList,
+  delAuthData,
+  updateAuthData,
+  addAuthData,
   getList,
-} from "../../../api/asyncVersion/article";
+} from "../../../api/asyncVersion/auth";
 import {
   Space,
   Table,
@@ -15,11 +15,11 @@ import {
   Form,
   Drawer,
   message,
+  Tag,
 } from "antd";
-import { nanoid } from "nanoid";
 
-export default function ArticleList() {
-  const [articleData, setArticleData] = useState([]);
+export default function AuthList() {
+  const [AuthData, setAuthData] = useState([]);
 
   const [addVisible, setaddVisible] = useState(false);
   const [editaddVisible, seteditAddVisible] = useState(false);
@@ -29,63 +29,54 @@ export default function ArticleList() {
   let formRef1 = useRef();
   let formRef = useRef();
   useEffect(() => {
-    getArticleData();
+    getAuthData();
     getListData();
   }, []);
 
-  //请求文章数据
+  //请求权限数据
 
-  const getArticleData = async () => {
-    let res = await getArticleList();
-    setArticleData(res);
+  const getAuthData = async () => {
+    let res = await getAuthList();
+    setAuthData(res);
     console.log("res111111111111", res);
   };
-  //通过文章查查关联的用户  _embed为向下关联，（仅为示例）
-  // const getListData = async () => {
-  //   //json-serevr高级用法（表关联查询）：_embed ,如通过用户表关联文章表数据
-  //   //articles：文章表
-  //   // let res = await getArticleList();
-  //   let res = await getList("?_embed=articles");
-  //   console.log("通过用户表关联文章表数据", res);
-  // };
-
-  //通过文章查查关联的用户 _expand为向上关联，（仅为示例）
+  //通过权限查查关联的权限  _embed为向下关联，（仅为示例）
   const getListData = async () => {
-    //json-serevr高级用法（表关联查询）：_expand ,如通过文章表获取用户表数据
-    // users：用户表 使用_expand为向上关联得用user
-    let res = await getList("?_expand=user");
-    console.log("通过文章查查关联的用户", res);
+    let res = await getList("?_embed=articles");
+    console.log("通过权限表关联文章表数据", res);
   };
-  //文章数据添加
-  const addArticle = async () => {
+
+  //权限数据添加
+  const addAuth = async () => {
     const data = {
-      title: `中国载人登月初步方案公布${+new Date()}`,
-      author: "姜帆",
-      describe: nanoid(),
+      title: "首页1",
+      key: "/home",
+      pagepermisson: 1,
+      grade: 1,
     };
-    let res = await addArticleData(data);
-    console.log("文章数据更新", res);
-    getArticleData();
+    let res = await addAuthData(data);
+    console.log("权限数据更新", res);
+    getAuthData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
     console.log("res", res);
   };
 
-  //文章数据删除
+  //权限数据删除
   const deleteData = async (data) => {
     console.log("data", data);
-    let res = await delArticleData(data.id);
-    getArticleData();
-    console.log("文章数据删除", res);
+    let res = await delAuthData(data.id);
+    getAuthData();
+    console.log("权限数据删除", res);
   };
 
-  //文章数据更新
+  //权限数据更新
   const updateData = async (data) => {
-    let res = await updateArticleData(rowid, { title: data.title });
-    console.log("文章数据更新", res);
+    let res = await updateAuthData(rowid, { title: data.title });
+    console.log("权限数据更新", res);
 
-    getArticleData();
+    getAuthData();
     seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
   };
@@ -101,24 +92,24 @@ export default function ArticleList() {
   };
 
   const updateState = (e) => {
-    setSeachValue(e.target.value);
+    setSeachValue(e.target.value.trim());
   }; //即时更新，不加这个就不会更新输入框内容
 
-  //实现按照姓名查询数据
+  //实现按照权限名称查询数据
   const queryfn = () => {
     clearTimeout(window.timer); //防抖查询
     window.timer = setTimeout(() => {
       //搜索框输入值，就按搜索查
       if (seachValue.length > 0) {
-        let data = articleData.filter((r) => r.title === seachValue);
+        let data = AuthData.filter((r) => r.title === seachValue);
         if (data.length !== 0) {
-          setArticleData(data);
+          setAuthData(data);
         } else {
-          setArticleData([]);
+          setAuthData([]);
         }
       } else {
         //搜索框没输入值，就查全部
-        getArticleData();
+        getAuthData();
       }
     }, 500);
   };
@@ -126,7 +117,7 @@ export default function ArticleList() {
   //输入框清空
   const clear = (e) => {
     setSeachValue("");
-    getArticleData();
+    getAuthData();
   };
 
   //显示修改信息抽屉
@@ -153,20 +144,21 @@ export default function ArticleList() {
   };
   const columns = [
     {
-      title: "文章标题",
-      dataIndex: "title",
-      key: "title",
-      render: (text) => <a>{text}</a>,
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+      render: (id) => <b>{id}</b>,
     },
     {
-      title: "文章作者",
-      dataIndex: "author",
-      key: "author",
+      title: "权限名称",
+      dataIndex: "label",
+      key: "label",
     },
     {
-      title: "文章描述",
-      dataIndex: "describe",
-      key: "describe",
+      title: "权限路径·",
+      dataIndex: "key",
+      key: "key",
+      render: (key) => <Tag color="#1DA57A">{key}</Tag>,
     },
     {
       title: "操作",
@@ -191,7 +183,7 @@ export default function ArticleList() {
     <div>
       <div style={{ marginBottom: "20px" }}>
         <Input
-          placeholder="请根据文章标题查找信息"
+          placeholder="请根据权限名称查找权限信息"
           style={{ marginLeft: "10px", width: "20%" }}
           value={seachValue}
           onChange={updateState}
@@ -208,21 +200,27 @@ export default function ArticleList() {
           style={{ marginLeft: "10px" }}
           onClick={showDrawer.bind(this)}
         >
-          添加信息
+          添加权限
         </Button>
       </div>
-      <Table columns={columns} dataSource={articleData} />
-      <Drawer title="添加文章信息" onClose={onClose} open={addVisible}>
+      <Table
+        columns={columns}
+        dataSource={AuthData}
+        pagination={{
+          pageSize: 10,
+        }}
+      />
+      <Drawer title="添加权限信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}
-          onFinish={addArticle}
+          onFinish={addAuth}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
-            name="title"
-            label="文章标题"
-            rules={[{ required: true, message: "请输入文章标题" }]}
+            name="Authname"
+            label="权限名称"
+            rules={[{ required: true, message: "请输入权限名称" }]}
           >
             <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
           </Form.Item>
@@ -233,7 +231,7 @@ export default function ArticleList() {
           </Button>
         </Form>
       </Drawer>
-      <Drawer title="修改文章信息" onClose={onClose1} open={editaddVisible}>
+      <Drawer title="修改权限信息" onClose={onClose1} open={editaddVisible}>
         <Form
           ref={formRef1}
           onFinish={updateData}
@@ -241,11 +239,15 @@ export default function ArticleList() {
           autoComplete="off"
         >
           <Form.Item
-            name="title"
-            label="文章标题"
-            rules={[{ required: true, message: "请输入文章标题" }]}
+            name="Authname"
+            label="权限名称"
+            rules={[{ required: true, message: "请输入权限名称" }]}
           >
-            <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
+            <Input
+              placeholder="请输入"
+              id="Authname"
+              title="输入2-6位中文汉字"
+            />
           </Form.Item>
 
           <Button onClick={onClose1.bind(this)}>取消</Button>

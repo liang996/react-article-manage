@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   getUserList,
   delUserData,
-  udateUserData,
+  updateUserData,
   addUserData,
   getList,
 } from "../../api/asyncVersion/user";
@@ -16,7 +16,6 @@ import {
   Drawer,
   message,
 } from "antd";
-import { nanoid } from "nanoid";
 
 export default function UserList() {
   const [UserData, setUserData] = useState([]);
@@ -73,7 +72,7 @@ export default function UserList() {
 
   //用户数据更新
   const updateData = async (data) => {
-    let res = await udateUserData(rowid, { username: data.username });
+    let res = await updateUserData(rowid, { username: data.username });
     console.log("用户数据更新", res);
 
     getUserData();
