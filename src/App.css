@@ -5,3 +5,8 @@
   /* background-image: linear-gradient(to right, #fbc2eb, #a6c1ee); */
 
 }
+  /*目录滚动条样式 */
+
+::-webkit-scrollbar {width:5px;height:5px;position:absolute;}
+::-webkit-scrollbar-thumb {background-color:#1DA57A}
+::-webkit-scrollbar-track{background-color:#ddd}

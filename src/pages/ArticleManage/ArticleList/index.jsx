@@ -49,12 +49,11 @@ export default function ArticleList() {
   //   console.log("通过用户表关联文章表数据", res);
   // };
 
-    //通过文章查查关联的用户 _expand为向上关联，（仅为示例）
+  //通过文章查查关联的用户 _expand为向上关联，（仅为示例）
   const getListData = async () => {
     //json-serevr高级用法（表关联查询）：_expand ,如通过文章表获取用户表数据
-    // users：用户表
-    // let res = await getArticleList();
-    let res = await getList("?_expand=users");
+    // users：用户表 使用_expand为向上关联得用user
+    let res = await getList("?_expand=user");
     console.log("通过文章查查关联的用户", res);
   };
   //文章数据添加
@@ -109,11 +108,17 @@ export default function ArticleList() {
   const queryfn = () => {
     clearTimeout(window.timer); //防抖查询
     window.timer = setTimeout(() => {
-      let data = articleData.filter((r) => r.title === seachValue);
-      if (data.length !== 0) {
-        setArticleData(data);
+      //搜索框输入值，就按搜索查
+      if (seachValue.length > 0) {
+        let data = articleData.filter((r) => r.title === seachValue);
+        if (data.length !== 0) {
+          setArticleData(data);
+        } else {
+          setArticleData([]);
+        }
       } else {
-        setArticleData([]);
+        //搜索框没输入值，就查全部
+        getArticleData();
       }
     }, 500);
   };
