@@ -38,6 +38,9 @@ export default function ArticleList() {
     setArticleData(res);
     console.log("res111111111111", res);
   };
+//json-serevr高级用法（表关联查询）：_embed ,如用户表关联了文章表
+// articles：文章表
+// let res = await getArticleList("?_embed=articles");
 
   //文章数据添加
   const addArticle = async () => {

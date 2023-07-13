@@ -1,66 +1,4 @@
 {
-  "articles": [
-    {
-      "id": 1,
-      "title": "文章类的数据表 设计技巧",
-      "author": "刘帆帆",
-      "describe": "json-server可以快速的模拟接口"
-    },
-    {
-      "id": 2,
-      "title": "中国载人登月初步方案公布",
-      "author": "王帆帆",
-      "describe": "json-server可以快速的模拟接口"
-    },
-    {
-      "id": 3,
-      "title": "点亮夜间经济 提升城市活力",
-      "author": "周帆帆",
-      "describe": "新建一个文件夹，名字随意"
-    },
-    {
-      "id": 4,
-      "title": "仅1%年轻人月收入超过5万",
-      "author": "孙帆帆",
-      "describe": ""
-    },
-    {
-      "id": 5,
-      "title": "女子称火车上被上铺男子凝视1小时",
-      "author": "李帆帆",
-      "describe": "在当前文件夹，执行启动json-server的服务"
-    },
-    {
-      "id": 6,
-      "title": "太爷1张奖状奖1千重孙女拿出29张",
-      "author": "吴帆帆",
-      "describe": "json-server 模拟接口请求 搭配 mock.js 接口的增删改查"
-    },
-    {
-      "id": 7,
-      "title": "女子高铁上哭闹20分钟要求靠边坐",
-      "author": "郑帆帆",
-      "describe": "Java读取json文件并对json数据进行读取、添加、删除与修改操作"
-    },
-    {
-      "title": "中国载人登月初步方案公布1689172948774",
-      "author": "王帆帆",
-      "describe": "要做的就是根据这个数据结构生成TreeNode",
-      "id": 8
-    },
-    {
-      "title": "中国载人登月初步方案公布1689172948774",
-      "author": "杨帆",
-      "describe": "要做的就是根据这个数据结构生成TreeNode",
-      "id": 9
-    },
-    {
-      "title": "中国载人登月初步方案公布1689172948774",
-      "author": "马诹",
-      "describe": "要做的就是根据这个数据结构生成TreeNode",
-      "id": 10
-    }
-  ],
   "users": [
     {
       "id": 1,
@@ -115,8 +53,100 @@
       "username": "吴三",
       "age": 91,
       "sex": 0
+    },
+    {
+      "id": 10,
+      "username": "宋三",
+      "age": 27,
+      "sex": 1
+    },
+    {
+      "id": 11,
+      "username": "沈三",
+      "age": 27,
+      "sex": 0
     }
   ],
+  "articles": [
+    {
+      "id": 1,
+      "title": "文章类的数据表修改",
+      "author": "张三",
+      "usersId": 1,
+      "describe": "json-server可以快速的模拟接口"
+    },
+    {
+      "id": 2,
+      "title": "中国载人登月初步方案公布",
+      "author": "李三",
+      "usersId": 2,
+      "describe": "json-server可以快速的模拟接口"
+    },
+    {
+      "id": 3,
+      "title": "点亮夜间经济 提升城市活力",
+      "author": "王三",
+      "usersId": 3,
+      "describe": "新建一个文件夹，名字随意"
+    },
+    {
+      "id": 4,
+      "title": "仅1%年轻人月收入超过5万",
+      "author": "刘三",
+      "usersId": 4,
+      "describe": ""
+    },
+    {
+      "id": 5,
+      "title": "女子称火车上被上铺男子凝视1小时",
+      "author": "马三",
+      "usersId": 5,
+      "describe": "在当前文件夹，执行启动json-server的服务"
+    },
+    {
+      "id": 6,
+      "title": "太爷1张奖状奖1千重孙女拿出29张",
+      "author": "赵三",
+      "usersId": 6,
+      "describe": "json-server 模拟接口请求 搭配 mock.js 接口的增删改查"
+    },
+    {
+      "id": 7,
+      "usersId": 7,
+      "title": "女子高铁上哭闹20分钟要求靠边坐",
+      "author": "孙三",
+      "describe": "Java读取json文件并对json数据进行读取、添加、删除与修改操作"
+    },
+    {
+      "usersId": 8,
+      "title": "中国载人登月初步方案公布1689172948774",
+      "author": "周三",
+      "describe": "要做的就是根据这个数据结构生成T周三",
+      "id": 8
+    },
+    {
+      "usersId": 9,
+      "title": "中国载人登月初步方案公布吴三",
+      "author": "吴三",
+      "describe": "要做的就是根据这个数据结构生成吴三",
+      "id": 9
+    },
+    {
+      "usersId": 10,
+      "title": "中国载人登月初步方案公布宋三",
+      "author": "宋三",
+      "describe": "要做的就是根据这个数据结构生成宋三",
+      "id": 10
+    },
+    {
+      "usersId": 11,
+      "title": "中国载人登月初步方案公布沈三",
+      "author": "沈三",
+      "describe": "要做的就是根据这个数据结构生成沈三",
+      "id": 11
+    }
+  ],
+
   "menuLists": [
     {
       "label": "首页",

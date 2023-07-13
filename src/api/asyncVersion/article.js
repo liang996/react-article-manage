@@ -1,4 +1,4 @@
-import {postData,fetchData,deleteData,putData} from "./index";
+import {postData,fetchData,deleteData,patchData} from "./index";
 //文章列表查询
 export const getArticleList = () => {
     return fetchData("/articles")
@@ -15,5 +15,5 @@ export const delArticleData = (id) => {
 
 //文章列表修改
 export const udateArticleData = (id,params) => {
-    return putData(`/articles/${id}`,params)
+    return patchData(`/articles/${id}`,params)
 };
