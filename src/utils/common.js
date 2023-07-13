@@ -9,5 +9,5 @@ export const removeToken = () => {
 //判断是否有权限
 export const isAuth = (parame) => {
   console.log('parame', parame)
-  return parame=== 1 ? true : false;
+  return parame;
 };

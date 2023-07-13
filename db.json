@@ -156,7 +156,7 @@
       "label": "用户管理",
       "icon": null,
       "key": "/user",
-      "auth":0
+      "auth":1
     },
     {
       "label": "文章管理",
