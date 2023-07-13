@@ -50,9 +50,9 @@ export default function UserList() {
   //用户数据添加
   const addUser = async () => {
     const data = {
-      title: `中国载人登月初步方案公布${+new Date()}`,
-      author: "姜帆",
-      describe: nanoid(),
+      username: `王小虎`,
+      age: 39,
+      sex: 1,
     };
     let res = await addUserData(data);
     console.log("用户数据更新", res);
@@ -73,7 +73,7 @@ export default function UserList() {
 
   //用户数据更新
   const updateData = async (data) => {
-    let res = await udateUserData(rowid, { title: data.title });
+    let res = await udateUserData(rowid, { username: data.username });
     console.log("用户数据更新", res);
 
     getUserData();
@@ -101,7 +101,7 @@ export default function UserList() {
     window.timer = setTimeout(() => {
       //搜索框输入值，就按搜索查
       if (seachValue.length > 0) {
-        let data = UserData.filter((r) => r.title === seachValue);
+        let data = UserData.filter((r) => r.username === seachValue);
         if (data.length !== 0) {
           setUserData(data);
         } else {
@@ -158,6 +158,12 @@ export default function UserList() {
       title: "性别",
       dataIndex: "sex",
       key: "sex",
+      render: (_, { sex }) => (
+        <>
+        {  sex===0?"女":"男"}
+       
+        </>
+      ),
     },
     {
       title: "操作",
@@ -234,9 +240,9 @@ export default function UserList() {
           <Form.Item
             name="username"
             label="姓名"
-            rules={[{ required: true, message: "请输入用户标题" }]}
+            rules={[{ required: true, message: "请输入姓名" }]}
           >
-            <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
+            <Input placeholder="请输入" id="username" title="输入2-6位中文汉字" />
           </Form.Item>
 
           <Button onClick={onClose1.bind(this)}>取消</Button>
