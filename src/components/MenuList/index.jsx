@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Layout ,message} from "antd";
+import { Menu, Layout } from "antd";
 import { withRouter } from "react-router-dom";
 import { getMenuList } from "../../api/asyncVersion/menu";
 import "./index.css";
@@ -15,10 +15,10 @@ function MenuList(props) {
   useEffect(() => {
     getArticleData();
   }, []);
-    //请求文章数据
+  //请求文章数据
   const getArticleData = async () => {
     let res = await getMenuList();
-    setMenuData(res)
+    setMenuData(res);
 
     console.log("res111111111111", res);
   };

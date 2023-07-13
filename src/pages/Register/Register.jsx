@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { message   } from 'antd';
+import { Button, message } from "antd";
+
 import styleModule from "./Register.module.css";
 export default class register extends Component {
   state = {
@@ -16,7 +17,7 @@ export default class register extends Component {
     const { userName, password } = this.state;
     //判断输入内容是否为空
     if (userName.trim() === "" || password.trim() === "") {
-      message.error('输入内容不能为空');
+      message.error("输入内容不能为空");
 
       return; //拦截
     } else {
@@ -26,7 +27,7 @@ export default class register extends Component {
       };
 
       localStorage.setItem("userData", JSON.stringify(data));
-      message.success('注册成功，去登录');
+      message.success("注册成功，去登录");
 
       this.props.history.push("/login");
     }
@@ -35,14 +36,14 @@ export default class register extends Component {
     return (
       <div className={styleModule.container}>
         <div className={styleModule["register-wrapper"]}>
-          <div className={styleModule.header}>react管理系统</div>
+          <div className={styleModule.header}>文章管理系统</div>
           <div className={styleModule["form-wrapper"]}>
             账号：
             <input
               type="text"
               name="username"
               placeholder="请输入账号"
-              className={styleModule["form-wrapper"]}
+              className={styleModule["input-item"]}
               onChange={this.saveFormData("userName")}
             />
             密码：
@@ -53,12 +54,19 @@ export default class register extends Component {
               className={styleModule["input-item"]}
               onChange={this.saveFormData("password")}
             />
-            <div id="register" className={styleModule.btn} onClick={this.isRegister}>
-              注册
-            </div>
+            <Button
+              id="register"
+              className={styleModule.btn}
+              onClick={this.isRegister}
+            >
+              登录
+            </Button>
+            {/* <div  id="register" className={styleModule.}"btn" onClick={this.isregister}>
+            登录
+          </div> */}
           </div>
           <div className={styleModule.msg}>
-            已有账号? <Link to="/register">去登录</Link>
+            已有账号? <Link to="/login">去登入</Link>
           </div>
         </div>
       </div>

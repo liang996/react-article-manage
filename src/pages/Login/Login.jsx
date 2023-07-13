@@ -43,11 +43,8 @@ export default class Login extends Component {
       //   query: { userName, password },
       // });
 
-      let tokenObj = {
-        auth: false,
-        token:nanoid(),
-      };
-      localStorage.setItem("tokenObj",JSON.stringify(tokenObj));
+
+      localStorage.setItem("token",nanoid());
 
       //传递state参数
       this.props.history.push({
@@ -60,7 +57,7 @@ export default class Login extends Component {
     return (
       <div className={styleModule.container}>
         <div className={styleModule["login-wrapper"]}>
-          <div className={styleModule.header}>react管理系统</div>
+          <div className={styleModule.header}>文章管理系统</div>
           <div className={styleModule["form-wrapper"]}>
             账号：
             <input
