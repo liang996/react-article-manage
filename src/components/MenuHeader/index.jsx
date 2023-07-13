@@ -3,8 +3,9 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
-import { Layout, Dropdown, Menu, Space, Avatar } from "antd";
+import { Layout, Dropdown, Menu, Space, Avatar, message } from "antd";
 import React, { useState } from "react";
+import { removeToken } from "../../utils/common";
 
 const { Header } = Layout;
 
@@ -13,29 +14,34 @@ export default function MenuHeader() {
   const changeFoldOutlined = () => {
     setCollapsed(!collapsed);
   };
-  const menu = (
-    <Menu
-      items={[
-        // {
-        //   key: "1",
-        //   label: (
-        //     <a
-        //       target="_blank"
-        //       rel="noopener noreferrer"
-        //       href="https://www.antgroup.com"
-        //     >
-        //       退出登录
-        //     </a>
-        //   ),
-        // },
-        {
-          key: "2",
-          danger: true,
-          label: "退出登录",
-        },
-      ]}
-    />
-  );
+
+  const onClick = ({ key }) => {
+    console.log('key', key)
+    if (key ==1) {
+      console.log('key111111111', key)
+
+      removeToken();
+      window.location.href = '/login'
+
+    }
+   
+  };
+
+  const items = [
+    {
+      label: "退出登录",
+      key: 1,
+    },
+    // ,
+    // {
+    //   label: "2nd menu item",
+    //   key: "2",
+    // },
+    // {
+    //   label: "3rd menu item",
+    //   key: "3",
+    // },
+  ];
   return (
     <Header
       className="site-layout-background"
@@ -53,7 +59,7 @@ export default function MenuHeader() {
           float: "right",
         }}
       >
-        <Dropdown menu={menu}>
+        <Dropdown menu={{ items, onClick }}>
           {/* <a onClick={(e) => e.preventDefault()}> */}
           <Space>
             <span>
