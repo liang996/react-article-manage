@@ -3,7 +3,8 @@ import {
   getArticleList,
   delArticleData,
   udateArticleData,
-  addArticleData
+  addArticleData,
+  getList,
 } from "../../../api/asyncVersion/article";
 import {
   Space,
@@ -15,7 +16,7 @@ import {
   Drawer,
   message,
 } from "antd";
-import axios from "axios";
+import { nanoid } from "nanoid";
 
 export default function ArticleList() {
   const [articleData, setArticleData] = useState([]);
@@ -29,6 +30,7 @@ export default function ArticleList() {
   let formRef = useRef();
   useEffect(() => {
     getArticleData();
+    getListData();
   }, []);
 
   //请求文章数据
@@ -38,23 +40,35 @@ export default function ArticleList() {
     setArticleData(res);
     console.log("res111111111111", res);
   };
-//json-serevr高级用法（表关联查询）：_embed ,如用户表关联了文章表
-// articles：文章表
-// let res = await getArticleList("?_embed=articles");
+  //通过文章查查关联的用户  _embed为向下关联，（仅为示例）
+  // const getListData = async () => {
+  //   //json-serevr高级用法（表关联查询）：_embed ,如通过用户表关联文章表数据
+  //   //articles：文章表
+  //   // let res = await getArticleList();
+  //   let res = await getList("?_embed=articles");
+  //   console.log("通过用户表关联文章表数据", res);
+  // };
 
+    //通过文章查查关联的用户 _expand为向上关联，（仅为示例）
+  const getListData = async () => {
+    //json-serevr高级用法（表关联查询）：_expand ,如通过文章表获取用户表数据
+    // users：用户表
+    // let res = await getArticleList();
+    let res = await getList("?_expand=users");
+    console.log("通过文章查查关联的用户", res);
+  };
   //文章数据添加
   const addArticle = async () => {
-
     const data = {
       title: `中国载人登月初步方案公布${+new Date()}`,
-      author: "g帆帆",
-      describe: "",
+      author: "姜帆",
+      describe: nanoid(),
     };
     let res = await addArticleData(data);
     console.log("文章数据更新", res);
     getArticleData();
     setVisible(false);
-    formRef.current.resetFields() //修改成功后清空输入框中的数据
+    formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
     console.log("res", res);
   };
@@ -69,16 +83,13 @@ export default function ArticleList() {
 
   //文章数据更新
   const updateData = async (data) => {
-    let res = await udateArticleData(rowid,{title:data.title});
+    let res = await udateArticleData(rowid, { title: data.title });
     console.log("文章数据更新", res);
 
     getArticleData();
     setVisible1(false);
- formRef1.current.resetFields() //修改成功后清空输入框中的数据
-
-
-  }
-    
+    formRef1.current.resetFields(); //修改成功后清空输入框中的数据
+  };
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
@@ -90,35 +101,28 @@ export default function ArticleList() {
     setVisible(true);
   };
 
-  const  updateState = (e) => {
-    setSeachValue(e.target.value )
-  } //即时更新，不加这个就不会更新输入框内容
-  
-  
+  const updateState = (e) => {
+    setSeachValue(e.target.value);
+  }; //即时更新，不加这个就不会更新输入框内容
 
   //实现按照姓名查询数据
   const queryfn = () => {
-
-
     clearTimeout(window.timer); //防抖查询
     window.timer = setTimeout(() => {
       let data = articleData.filter((r) => r.title === seachValue);
       if (data.length !== 0) {
         setArticleData(data);
-      }else{
+      } else {
         setArticleData([]);
-
       }
     }, 500);
   };
 
-    //输入框清空
+  //输入框清空
   const clear = (e) => {
-    setSeachValue("")
+    setSeachValue("");
     getArticleData();
-
   };
-
 
   //显示修改信息抽屉
   const showDrawer1 = (r) => {
@@ -164,7 +168,7 @@ export default function ArticleList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          {/* <a>添加</a> */}
+          <a onClick={showDrawer1.bind(this, record)}>修改</a>
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -174,27 +178,34 @@ export default function ArticleList() {
           >
             <a style={{ color: "#fa8c16" }}>删除</a>
           </Popconfirm>
-
-          <a onClick={showDrawer1.bind(this, record)}>修改</a>
         </Space>
       ),
     },
   ];
   return (
     <div>
-      <Button type="primary" onClick={showDrawer.bind(this)}>
-        添加信息
-      </Button>
-      <Input
-        placeholder="请根据文章标题查找信息"
-        style={{ marginLeft: "10px", width: "20%" }}
-        value={seachValue} onChange={updateState} 
-      />
-          <Button  onClick={clear} >重置</Button>
+      <div style={{ marginBottom: "20px" }}>
+        <Input
+          placeholder="请根据文章标题查找信息"
+          style={{ marginLeft: "10px", width: "20%" }}
+          value={seachValue}
+          onChange={updateState}
+        />
+        <Button onClick={clear} style={{ marginLeft: "10px" }}>
+          重置
+        </Button>
 
-      <Button type="primary" onClick={queryfn}>
-       查询
-      </Button>
+        <Button style={{ marginLeft: "10px" }} type="primary" onClick={queryfn}>
+          查询
+        </Button>
+        <Button
+          type="primary"
+          style={{ marginLeft: "10px" }}
+          onClick={showDrawer.bind(this)}
+        >
+          添加信息
+        </Button>
+      </div>
       <Table columns={columns} dataSource={articleData} />
       <Drawer title="添加文章信息" onClose={onClose} visible={visible}>
         <Form
@@ -208,11 +219,7 @@ export default function ArticleList() {
             label="文章标题"
             rules={[{ required: true, message: "请输入文章标题" }]}
           >
-            <Input
-              placeholder="请输入"
-              id="title"
-              title="输入2-6位中文汉字"
-            />
+            <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
           </Form.Item>
 
           <Button onClick={onClose.bind(this)}>取消</Button>
@@ -233,11 +240,7 @@ export default function ArticleList() {
             label="文章标题"
             rules={[{ required: true, message: "请输入文章标题" }]}
           >
-            <Input
-              placeholder="请输入"
-              id="title"
-              title="输入2-6位中文汉字"
-            />
+            <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
           </Form.Item>
 
           <Button onClick={onClose1.bind(this)}>取消</Button>
