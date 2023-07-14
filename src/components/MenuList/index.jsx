@@ -39,12 +39,7 @@ function MenuList(props) {
         }
         //把只有一层都可以折叠的功能修复
         if (item?.children?.length > 0 && checkAuth(item)) {
-        let res=  renderMenu(item.children);
-        console.log('res', res)
-          if (res?.length > 0 && checkAuth(res)) {
-            renderMenu(res);
-            return res;
-          }
+          renderMenu(item.children);
           return item;
         } else if (checkAuth(item)) {
           item.children = "";
