@@ -4,6 +4,7 @@ import {
   delAuthData,
   updateAuthData,
   addAuthData,
+  delChildrendData
 } from "../../../api/asyncVersion/auth";
 import {
   Space,
@@ -74,16 +75,18 @@ export default function AuthList() {
     if (data.grade === 1) {
       let res = await delAuthData(data.id);
       getAuthData();
-      console.log("权限数据删除", res);
+      console.log("第一层权限数据删除", res);
     } else {
-      let list = authData.filter((item) => item.id === data.parentid);
+      console.log('authData', authData)
+      let list = authData.filter((item) => item.id === data.menuId)
       console.log("item1", list);
 
       list[0].children = list[0].children.filter((item) => data.id !== item.id);
+      setAuthData([...authData])
 
-      let res = await delAuthData(data.id);
+      let res = await delChildrendData(data.id);
       getAuthData();
-      console.log("权限数据删除", res);
+      console.log("第二层权限数据删除", res);
     }
   };
 
@@ -91,7 +94,6 @@ export default function AuthList() {
   const updateData = async (data) => {
     let res = await updateAuthData(rowid, { title: data.title });
     console.log("权限数据更新", res);
-
     getAuthData();
     seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据

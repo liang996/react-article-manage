@@ -15,6 +15,10 @@ export const addAuthData = (params) => {
 export const delAuthData = (id) => {
     return deleteData(`/menus/${id}`)
 };
+//权限子列表删除
+export const delChildrendData = (id) => {
+    return deleteData(`/children/${id}`)
+};
 
 //权限列表修改
 export const updateAuthData = (id,params) => {
