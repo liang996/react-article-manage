@@ -26,9 +26,6 @@ axios.interceptors.response.use(
     // 对响应数据做点什么
     if (response.code === 200) {
       return response;
-    } else {
-
-      console.error("请求错误");
     }
     return response;
   },

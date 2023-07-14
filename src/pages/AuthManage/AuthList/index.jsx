@@ -78,7 +78,7 @@ export default function AuthList() {
       console.log("第一层权限数据删除", res);
     } else {
       console.log('authData', authData)
-      let list = authData.filter((item) => item.id === data.menuId)
+      let list = authData.filter((item) => item.id === data.catalogueId)
       console.log("item1", list);
 
       list[0].children = list[0].children.filter((item) => data.id !== item.id);
@@ -182,8 +182,10 @@ export default function AuthList() {
       title: "操作",
       key: "action",
       render: (_, record) => (
+
         <Space size="middle">
-          <a onClick={showDrawer1.bind(this, record)}>修改</a>
+                  {console.log('record', record)}
+                  <Button type="link" onClick={showDrawer1.bind(this, record)}>修改</Button>
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -191,7 +193,8 @@ export default function AuthList() {
             okText="确定"
             cancelText="取消"
           >
-            <a style={{ color: "#fa8c16" }}>删除</a>
+                              <Button type="link" style={{ color: "#fa8c16" }}>删除</Button>
+
           </Popconfirm>
         </Space>
       ),
