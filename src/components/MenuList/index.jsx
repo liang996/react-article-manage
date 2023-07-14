@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Layout } from "antd";
 import { withRouter } from "react-router-dom";
-import { getMenuList } from "../../api/asyncVersion/menu";
+import { getList } from "../../api/asyncVersion/menu";
 import { UserOutlined, HomeOutlined, PicLeftOutlined } from "@ant-design/icons";
 import { WeatherIcon } from "../../utils/icon";
 
@@ -27,16 +27,24 @@ function MenuList(props) {
   }, []);
 
   const renderMenu = (menuList) => {
-    return menuList&&menuList.map((item) => {
-      if (!item.icon) {
-        item.icon = iconList[item.key];
-      }
-      return item ;
-    });
+    return (
+      menuList &&
+      menuList.map((item) => {
+        if (!item.icon) {
+          item.icon = iconList[item.key];
+        }
+        //把只有一层都可以折叠的功能修复
+        if (item.children.length === 0) { 
+          item.children = "";
+        }
+        return item;
+      })
+    );
   };
   //请求菜单数据
   const getArticleData = async () => {
-    let res = await getMenuList();
+    let res = await getList("?_embed=children");
+    console.log("通过目录表关联的子目录表数据", res);
     let iconMap = renderMenu(res);
     setMenuData(iconMap);
   };
@@ -82,9 +90,9 @@ function MenuList(props) {
   //   );
   // };
   //父路由选中
-const selectedKeys=[props.location.pathname]
-//子路由展开选中
-const OpenKeys=[`/${props.location.pathname.split("/")[1]}`]
+  const selectedKeys = [props.location.pathname];
+  //子路由展开选中
+  const OpenKeys = [`/${props.location.pathname.split("/")[1]}`];
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  getAuthList,
+  getList,
   delAuthData,
   updateAuthData,
   addAuthData,
-  getList,
 } from "../../../api/asyncVersion/auth";
 import {
   Space,
@@ -19,7 +18,7 @@ import {
 } from "antd";
 
 export default function AuthList() {
-  const [AuthData, setAuthData] = useState([]);
+  const [authData, setAuthData] = useState([]);
 
   const [addVisible, setaddVisible] = useState(false);
   const [editaddVisible, seteditAddVisible] = useState(false);
@@ -30,20 +29,25 @@ export default function AuthList() {
   let formRef = useRef();
   useEffect(() => {
     getAuthData();
-    getListData();
   }, []);
-
+  const renderAuth = (menuList) => {
+    return (
+      menuList &&
+      menuList.map((item) => {
+        //把只有一层都可以折叠的功能修复
+        if (item.children.length === 0) {
+          item.children = "";
+        }
+        return item;
+      })
+    );
+  };
   //请求权限数据
 
   const getAuthData = async () => {
-    let res = await getAuthList();
-    setAuthData(res);
-    console.log("res111111111111", res);
-  };
-  //通过权限查查关联的权限  _embed为向下关联，（仅为示例）
-  const getListData = async () => {
-    let res = await getList("?_embed=articles");
-    console.log("通过权限表关联文章表数据", res);
+    let res = await getList("?_embed=children");
+    let iconMap = renderAuth(res);
+    setAuthData(iconMap);
   };
 
   //权限数据添加
@@ -65,10 +69,22 @@ export default function AuthList() {
 
   //权限数据删除
   const deleteData = async (data) => {
-    console.log("data", data);
-    let res = await delAuthData(data.id);
-    getAuthData();
-    console.log("权限数据删除", res);
+    console.log("权限数据删除", data);
+    //grade:该字段用于标识目录层级 1：为层级只有一层 2：为层级有二层
+    if (data.grade === 1) {
+      let res = await delAuthData(data.id);
+      getAuthData();
+      console.log("权限数据删除", res);
+    } else {
+      let list = authData.filter((item) => item.id === data.parentid);
+      console.log("item1", list);
+
+      list[0].children = list[0].children.filter((item) => data.id !== item.id);
+
+      let res = await delAuthData(data.id);
+      getAuthData();
+      console.log("权限数据删除", res);
+    }
   };
 
   //权限数据更新
@@ -101,7 +117,7 @@ export default function AuthList() {
     window.timer = setTimeout(() => {
       //搜索框输入值，就按搜索查
       if (seachValue.length > 0) {
-        let data = AuthData.filter((r) => r.title === seachValue);
+        let data = authData.filter((r) => r.title === seachValue);
         if (data.length !== 0) {
           setAuthData(data);
         } else {
@@ -205,7 +221,7 @@ export default function AuthList() {
       </div>
       <Table
         columns={columns}
-        dataSource={AuthData}
+        dataSource={authData}
         pagination={{
           pageSize: 10,
         }}
