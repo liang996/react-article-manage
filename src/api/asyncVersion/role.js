@@ -24,3 +24,7 @@ export const updateRoleData = (id,params) => {
 export const delChildrendData = (id) => {
     return deleteData(`/children/${id}`)
 };
+//目录列表查询 (表关联查询)
+export const geMenutList = (params) => {
+    return fetchData(`/catalogues${params}`)
+};

@@ -26,7 +26,7 @@ function MenuList(props) {
   const [MenuData, setMenuData] = useState([]);
 
   useEffect(() => {
-    getArticleData();
+    getMenuData();
   }, []);
 
   const checkAuth = (item) => item.auth === 1;
@@ -49,7 +49,7 @@ function MenuList(props) {
     );
   };
   //请求菜单数据
-  const getArticleData = async () => {
+  const getMenuData = async () => {
     let res = await getList("?_embed=children");
     console.log("通过目录表关联的子目录表数据", res);
     let iconMap = renderMenu(res);
@@ -80,7 +80,7 @@ function MenuList(props) {
   //         return (
   //           <Menu.SubMenu
   //             key={item.key}
-  //             title={item.label}
+  //             title={item.title}
   //             icon={iconList[item.key]}
   //           >
   //             {/* 递归 */}
@@ -90,7 +90,7 @@ function MenuList(props) {
   //       } else {
   //         return (
   //           isAuth(item.auth) && (
-  //             <Menu.Item key={item.key}>{item.label}</Menu.Item>
+  //             <Menu.Item key={item.key}>{item.title}</Menu.Item>
   //           )
   //         );
   //       }

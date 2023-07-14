@@ -4,7 +4,7 @@ import {
   delRoleData,
   updateRoleData,
   addRoleData,
-
+  geMenutList,
 } from "../../../api/asyncVersion/role";
 import {
   Space,
@@ -15,26 +15,46 @@ import {
   Form,
   Drawer,
   message,
+  Modal,
+  Tree,
 } from "antd";
 
 export default function RoleList() {
   const [roleData, setRoleData] = useState([]);
+  const [MenuData, setMenuData] = useState([]);
 
   const [addVisible, setaddVisible] = useState(false);
   const [editaddVisible, seteditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [rowid, setRowid] = useState(null);
   let formRef1 = useRef();
   let formRef = useRef();
   useEffect(() => {
     getRoleData();
+    getMenuData();
   }, []);
 
+  //请求菜单数据
+  const getMenuData = async () => {
+    let res = await geMenutList("?_embed=children");
+    console.log("res", res);
+    res.map((item) => {
+      item.title = item.label;
+      if (item.children.length > 0) {
+        item.children.forEach((items) => (items.title = items.label));
+      }
+      return item;
+    });
+
+    setMenuData(res);
+  };
   //请求角色数据
 
   const getRoleData = async () => {
     let res = await getRoleList();
+
     setRoleData(res);
     console.log("res111111111111", res);
   };
@@ -58,12 +78,11 @@ export default function RoleList() {
   //角色数据删除
 
   const deleteData = async (data) => {
-    let res =await delRoleData(data.id);
-     setRoleData(roleData.filter((r) => r.id !== data.id))
-      getRoleData();
+    let res = await delRoleData(data.id);
+    setRoleData(roleData.filter((r) => r.id !== data.id));
+    getRoleData();
     // getRoleData();
     //   console.log("角色数据删除", res);
-  
   };
   //角色数据更新
   const updateData = async (data) => {
@@ -136,6 +155,23 @@ export default function RoleList() {
 
     message.error("取消操作");
   };
+  //显示Modal
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  //关闭Modal
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const onSelect = (selectedKeys, info) => {
+    console.log("selected", selectedKeys, info);
+  };
+  const onCheck = (checkedKeys, info) => {
+    console.log("onCheck", checkedKeys, info);
+  };
   const columns = [
     {
       title: "ID",
@@ -154,7 +190,10 @@ export default function RoleList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={showDrawer1.bind(this, record)}>修改</a>
+          <Button type="link" onClick={showDrawer1.bind(this, record)}>
+            修改
+          </Button>
+
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -164,6 +203,10 @@ export default function RoleList() {
           >
             <a style={{ color: "#fa8c16" }}>删除</a>
           </Popconfirm>
+
+          <Button type="link" style={{ color: "green" }} onClick={showModal}>
+            目录列表
+          </Button>
         </Space>
       ),
     },
@@ -243,6 +286,20 @@ export default function RoleList() {
           </Button>
         </Form>
       </Drawer>
+
+      <Modal
+        title="权限分配"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Tree
+          checkable
+          onSelect={onSelect}
+          onCheck={onCheck}
+          treeData={MenuData}
+        />
+      </Modal>
     </div>
   );
 }
