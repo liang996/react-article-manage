@@ -20,3 +20,7 @@ export const delRoleData = (id) => {
 export const updateRoleData = (id,params) => {
     return patchData(`/roles/${id}`,params)
 };
+//权限子列表删除
+export const delChildrendData = (id) => {
+    return deleteData(`/children/${id}`)
+};

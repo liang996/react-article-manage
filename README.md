@@ -75,3 +75,4 @@ npm  run  eject
 
 ## 问题记录
 1.暂时权限列表控制子目录，不起作用
+2.ResizeObserver loop limit exceeded 删除功能偶尔会报

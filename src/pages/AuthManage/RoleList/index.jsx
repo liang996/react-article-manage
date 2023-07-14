@@ -4,7 +4,7 @@ import {
   delRoleData,
   updateRoleData,
   addRoleData,
-  getList,
+
 } from "../../../api/asyncVersion/role";
 import {
   Space,
@@ -28,23 +28,16 @@ export default function RoleList() {
   let formRef1 = useRef();
   let formRef = useRef();
   useEffect(() => {
-    getroleData();
-    getListData();
+    getRoleData();
   }, []);
 
   //请求角色数据
 
-  const getroleData = async () => {
+  const getRoleData = async () => {
     let res = await getRoleList();
     setRoleData(res);
     console.log("res111111111111", res);
   };
-  //通过角色查查关联的角色  _embed为向下关联，（仅为示例）
-  const getListData = async () => {
-    let res = await getList("?_embed=articles");
-    console.log("通过角色表关联文章表数据", res);
-  };
-
 
   //角色数据添加
   const addRole = async () => {
@@ -55,7 +48,7 @@ export default function RoleList() {
     };
     let res = await addRoleData(data);
     console.log("角色数据更新", res);
-    getroleData();
+    getRoleData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
@@ -63,19 +56,21 @@ export default function RoleList() {
   };
 
   //角色数据删除
-  const deleteData = async (data) => {
-    console.log("data", data);
-    let res = await delRoleData(data.id);
-    getroleData();
-    console.log("角色数据删除", res);
-  };
 
+  const deleteData = async (data) => {
+    let res =await delRoleData(data.id);
+     setRoleData(roleData.filter((r) => r.id !== data.id))
+      getRoleData();
+    // getRoleData();
+    //   console.log("角色数据删除", res);
+  
+  };
   //角色数据更新
   const updateData = async (data) => {
     let res = await updateRoleData(rowid, { roleName: data.roleName });
     console.log("角色数据更新", res);
 
-    getroleData();
+    getRoleData();
     seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
   };
@@ -108,7 +103,7 @@ export default function RoleList() {
         }
       } else {
         //搜索框没输入值，就查全部
-        getroleData();
+        getRoleData();
       }
     }, 500);
   };
@@ -116,7 +111,7 @@ export default function RoleList() {
   //输入框清空
   const clear = (e) => {
     setSeachValue("");
-    getroleData();
+    getRoleData();
   };
 
   //显示修改信息抽屉
@@ -197,7 +192,11 @@ export default function RoleList() {
           添加角色
         </Button>
       </div>
-      <Table columns={columns} dataSource={roleData} rowKey={(item)=>item.id} />
+      <Table
+        columns={columns}
+        dataSource={roleData}
+        rowKey={(item) => item.id}
+      />
       <Drawer title="添加角色信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}
@@ -231,7 +230,11 @@ export default function RoleList() {
             label="角色名称"
             rules={[{ required: true, message: "请输入角色名称" }]}
           >
-            <Input placeholder="请输入" id="roleName" title="输入2-6位中文汉字" />
+            <Input
+              placeholder="请输入"
+              id="roleName"
+              title="输入2-6位中文汉字"
+            />
           </Form.Item>
 
           <Button onClick={onClose1.bind(this)}>取消</Button>

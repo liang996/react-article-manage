@@ -76,6 +76,8 @@ export default function ArticleList() {
   const deleteData = async (data) => {
     console.log("data", data);
     let res = await delArticleData(data.id);
+    setArticleData(articleData.filter((r) => r.id !== data.id))
+
     getArticleData();
     console.log("文章数据删除", res);
   };
