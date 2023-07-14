@@ -29,10 +29,7 @@ function MenuList(props) {
     getArticleData();
   }, []);
 
-  const checkAuth = (item) => {
-    console.log("checkAuth", item);
-    return item.auth === 1;
-  };
+  const checkAuth = (item) => item.auth === 1;
   const renderMenu = (menuList) => {
     return (
       menuList &&
@@ -41,16 +38,18 @@ function MenuList(props) {
           item.icon = iconList[item.key];
         }
         //把只有一层都可以折叠的功能修复
-
-        if (item?.children?.length>0 && checkAuth(item)) {
-          renderMenu(item.children)
-          return item
-        }else if(item?.children?.length===0&& checkAuth(item)){
-          console.log('22222222222222222')
+        if (item?.children?.length > 0 && checkAuth(item)) {
+        let res=  renderMenu(item.children);
+        console.log('res', res)
+          if (res?.length > 0 && checkAuth(res)) {
+            renderMenu(res);
+            return res;
+          }
+          return item;
+        } else if (checkAuth(item)) {
           item.children = "";
-          return  item
+          return item;
         }
-        
       })
     );
   };

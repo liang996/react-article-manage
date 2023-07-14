@@ -200,7 +200,7 @@
       "label": "权限管理",
       "icon": null,
       "key": "/auth-manage",
-      "auth": 0,
+      "auth": 1,
       "grade": 1
     }
   ],
