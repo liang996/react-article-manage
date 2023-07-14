@@ -258,6 +258,7 @@ export default function AuthList() {
       <Table
         columns={columns}
         dataSource={authData}
+        rowKey={(item)=>item.id} 
         pagination={{
           pageSize: 10,
         }}

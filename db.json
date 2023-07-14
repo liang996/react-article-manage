@@ -146,6 +146,33 @@
       "id": 11
     }
   ],
+  "roles": [
+    {
+      "id": 1,
+      "roleName": "超级管理员",
+      "roleType": 1,
+      "rights": [
+        "/user-manage",
+        "/home"
+      ]
+    },
+    {
+      "id": 2,
+      "roleName": "普通管理员",
+      "roleType": 2,
+      "rights": [
+        "/home"
+      ]
+    },
+    {
+      "id": 3,
+      "roleName": "普通用户",
+      "roleType": 3,
+      "rights": [
+        "/home"
+      ]
+    }
+  ],
   "catalogues": [
     {
       "id": 1,

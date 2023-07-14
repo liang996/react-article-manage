@@ -73,3 +73,5 @@ npm  run  eject
  https://blog.csdn.net/weixin_48813932/article/details/124624103 
  ```
 
+## 问题记录
+1.暂时权限列表控制子目录，不起作用

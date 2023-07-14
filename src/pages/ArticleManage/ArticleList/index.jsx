@@ -211,7 +211,7 @@ export default function ArticleList() {
           添加信息
         </Button>
       </div>
-      <Table columns={columns} dataSource={articleData} />
+      <Table columns={columns} dataSource={articleData}  rowKey={(item)=>item.id}  />
       <Drawer title="添加文章信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}

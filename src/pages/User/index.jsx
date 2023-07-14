@@ -207,7 +207,7 @@ export default function UserList() {
           添加用户
         </Button>
       </div>
-      <Table columns={columns} dataSource={UserData} />
+      <Table columns={columns} dataSource={UserData}  rowKey={(item)=>item.id}  />
       <Drawer title="添加用户信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}
