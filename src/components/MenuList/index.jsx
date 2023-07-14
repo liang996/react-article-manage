@@ -10,9 +10,12 @@ const { Sider } = Layout;
 
 const iconList = {
   "/home": <HomeOutlined />,
-  "/weather": <WeatherIcon />,
-  "/user": <UserOutlined />,
+  "/weather-manage": <WeatherIcon />,
+  "/user-manage": <UserOutlined />,
   "/article-manage": <PicLeftOutlined />,
+  "/publish-manage": <UserOutlined />,
+  "/examine-manage": <UserOutlined />,
+  "/auth-manage": <UserOutlined />,
 };
 
 function MenuList(props) {
@@ -26,6 +29,10 @@ function MenuList(props) {
     getArticleData();
   }, []);
 
+  const checkAuth = (item) => {
+    console.log("checkAuth", item);
+    return item.auth === 1;
+  };
   const renderMenu = (menuList) => {
     return (
       menuList &&
@@ -34,10 +41,16 @@ function MenuList(props) {
           item.icon = iconList[item.key];
         }
         //把只有一层都可以折叠的功能修复
-        if (item.children.length === 0) { 
+
+        if (item?.children?.length>0 && checkAuth(item)) {
+          renderMenu(item.children)
+          return item
+        }else if(item?.children?.length===0&& checkAuth(item)){
+          console.log('22222222222222222')
           item.children = "";
+          return  item
         }
-        return item;
+        
       })
     );
   };
@@ -46,6 +59,7 @@ function MenuList(props) {
     let res = await getList("?_embed=children");
     console.log("通过目录表关联的子目录表数据", res);
     let iconMap = renderMenu(res);
+    console.log("iconMap", iconMap);
     setMenuData(iconMap);
   };
 

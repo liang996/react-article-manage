@@ -24,3 +24,7 @@ export const delChildrendData = (id) => {
 export const updateAuthData = (id,params) => {
     return patchData(`/catalogues/${id}`,params)
 };
+//权限子列表修改
+export const updateChildrenData = (id,params) => {
+    return patchData(`/children/${id}`,params)
+};

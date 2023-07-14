@@ -4,7 +4,8 @@ import {
   delAuthData,
   updateAuthData,
   addAuthData,
-  delChildrendData
+  delChildrendData,
+  updateChildrenData,
 } from "../../../api/asyncVersion/auth";
 import {
   Space,
@@ -15,6 +16,7 @@ import {
   Form,
   Drawer,
   message,
+  Switch,
   Tag,
 } from "antd";
 
@@ -77,12 +79,12 @@ export default function AuthList() {
       getAuthData();
       console.log("第一层权限数据删除", res);
     } else {
-      console.log('authData', authData)
-      let list = authData.filter((item) => item.id === data.catalogueId)
+      console.log("authData", authData);
+      let list = authData.filter((item) => item.id === data.catalogueId);
       console.log("item1", list);
 
       list[0].children = list[0].children.filter((item) => data.id !== item.id);
-      setAuthData([...authData])
+      setAuthData([...authData]);
 
       let res = await delChildrendData(data.id);
       getAuthData();
@@ -160,6 +162,25 @@ export default function AuthList() {
 
     message.error("取消操作");
   };
+  //更新权限按钮
+  const onChangeSwitch = async (checked, record) => {
+    console.log("checked", checked);
+    console.log("record", record);
+    record.auth = checked === 1 ? 0 : 1;
+    setAuthData([...authData]);
+
+    if (record.grade === 1) {
+    await updateAuthData(record.id, {
+        auth: record.auth,
+      });
+      getAuthData();
+    } else {
+     await updateChildrenData(record.id, { auth: record.auth });
+
+      getAuthData();
+    }
+  };
+
   const columns = [
     {
       title: "ID",
@@ -179,13 +200,22 @@ export default function AuthList() {
       render: (key) => <Tag color="#1DA57A">{key}</Tag>,
     },
     {
+      title: "开启授权",
+      dataIndex: "auth",
+      key: "auth",
+      render: (auth, record) => (
+        <Switch onChange={() => onChangeSwitch(auth, record)} checked={auth} />
+      ),
+    },
+    {
       title: "操作",
       key: "action",
       render: (_, record) => (
-
         <Space size="middle">
-                  {console.log('record', record)}
-                  <Button type="link" onClick={showDrawer1.bind(this, record)}>修改</Button>
+          {console.log("record", record)}
+          <Button type="link" onClick={showDrawer1.bind(this, record)}>
+            修改
+          </Button>
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -193,8 +223,9 @@ export default function AuthList() {
             okText="确定"
             cancelText="取消"
           >
-                              <Button type="link" style={{ color: "#fa8c16" }}>删除</Button>
-
+            <Button type="link" style={{ color: "#fa8c16" }}>
+              删除
+            </Button>
           </Popconfirm>
         </Space>
       ),
