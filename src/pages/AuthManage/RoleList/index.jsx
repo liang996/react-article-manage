@@ -20,9 +20,11 @@ import {
 } from "antd";
 
 export default function RoleList() {
-  const [roleData, setRoleData] = useState([]);
-  const [MenuData, setMenuData] = useState([]);
-  const [checkedKeys, setCheckedKeys] = useState([]);
+  const [roleData, setRoleData] = useState([]); //角色数据
+  const [menuData, setMenuData] = useState([]); //目录数据
+  const [checkedKeys, setCheckedKeys] = useState([]); //选择的key
+  const [checkedId, setCheckedId] = useState([]);
+
   const [addVisible, setaddVisible] = useState(false);
   const [editaddVisible, seteditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
@@ -156,13 +158,31 @@ export default function RoleList() {
     message.error("取消操作");
   };
   //显示Modal
-  const showModal = (data) => {
-    console.log("显示Modal", data);
+  const showModal = (data,id) => {
+    console.log("显示Modal", data,id);
     setIsModalOpen(true);
     setCheckedKeys(data);
+    setCheckedId(id);
+
   };
-  const handleOk = () => {
+  const handleOk =async () => {
     setIsModalOpen(false);
+    //同步menuData
+
+    setRoleData(
+      roleData.map((item) => {
+        if (item.id === checkedId) {
+          return {
+            ...item,
+            rights: checkedKeys,
+          };
+        }
+        return item;
+      })
+    );
+
+ await updateRoleData(checkedId, {  rights: checkedKeys,});
+
   };
   //关闭Modal
   const handleCancel = () => {
@@ -172,8 +192,8 @@ export default function RoleList() {
     console.log("selected", selectedKeys, info);
   };
   const onCheck = (checkedKeys, info) => {
-    console.log("onCheck", checkedKeys, info);
-    setCheckedKeys(checkedKeys);
+    console.log('checkedKeys :>> ', checkedKeys);
+    setCheckedKeys(checkedKeys.checked);
   };
   const columns = [
     {
@@ -210,7 +230,7 @@ export default function RoleList() {
           <Button
             type="link"
             style={{ color: "green" }}
-            onClick={() => showModal(record.rights)}
+            onClick={() => showModal(record.rights,record.id)}
           >
             目录列表
           </Button>
@@ -306,7 +326,7 @@ export default function RoleList() {
           onCheck={onCheck}
           checkedKeys={checkedKeys}
           checkStrictly={true}
-          treeData={MenuData}
+          treeData={menuData}
         />
       </Modal>
     </div>
