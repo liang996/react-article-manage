@@ -19,7 +19,6 @@ export default function MenuHeader() {
     removeToken();
     window.location.href = "/login";
     // if (key ==1) {
-    //   console.log('key111111111', key)
     // }
   };
 

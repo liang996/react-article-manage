@@ -81,7 +81,6 @@ export default class Weather extends Component {
   //请求天气数据
   getData = () => {
     const { cityId } = this.state;
-    console.log("cityId :>> ", cityId);
     getWeatherData({ city: cityId, key: "3686l3hnhg2ete52" })
       .then((res) => {
         this.setState({

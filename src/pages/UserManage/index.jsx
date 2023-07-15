@@ -43,7 +43,6 @@ export default function UserManage() {
   //通过用户查关联的角色信息
   const getUserArticlesData = async () => {
     let res = await getList("?_expand=role");
-    console.log("通过用户查关联的角色信息", res);
     setUserData(res);
   };
   //请求角色数据
@@ -58,19 +57,17 @@ export default function UserManage() {
     });
 
     setRoleData(res);
-    console.log("res111111111111", res);
   };
 
   //用户数据添加
   const addUser = () => {
-    console.log("用户数据添加11111", formRef);
     formRef.current.validateFields().then(async (res) => {
       let addData = await addUserData({
         ...res,
         roleState: true,
         default: false,
       });
-      console.log("addaccse", addData);
+      //console.log("addaccse", addData);
       //清空输入框
       formRef.current.resetFields();
       //   setUserData([...userData, {
@@ -87,7 +84,6 @@ export default function UserManage() {
 
   //用户数据删除
   const deleteData = async (data) => {
-    console.log("data", data);
     await delUserData(data.id);
     //删除完成重新查数据
     getUserArticlesData();
@@ -108,7 +104,6 @@ export default function UserManage() {
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
@@ -164,17 +159,14 @@ export default function UserManage() {
   //关闭修改信息对话框
   const onEditClose = () => {
     setEditAddVisible(false);
-    message.error("取消操作");
   };
   const SelectChange = (value) => {
-    console.log("value :>> ", value);
+    //console.log("value :>> ", value);
   };
 
   //关闭新增信息对话框
   const onAddClose = () => {
     setAddVisible(false);
-
-    message.error("取消操作");
   };
   const columns = [
     {

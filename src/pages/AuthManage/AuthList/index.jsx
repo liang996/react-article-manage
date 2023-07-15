@@ -61,41 +61,33 @@ export default function AuthList() {
       pagepermisson: 1,
       grade: 1,
     };
-    let res = await addAuthData(data);
-    console.log("权限数据更新", res);
+  await addAuthData(data);
     getAuthData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
-    console.log("res", res);
   };
 
   //权限数据删除
   const deleteData = async (data) => {
-    console.log("权限数据删除", data);
     //grade:该字段用于标识目录层级 1：为层级只有一层 2：为层级有二层
     if (data.grade === 1) {
-      let res = await delAuthData(data.id);
+    await delAuthData(data.id);
       getAuthData();
-      console.log("第一层权限数据删除", res);
     } else {
-      console.log("authData", authData);
       let list = authData.filter((item) => item.id === data.catalogueId);
-      console.log("item1", list);
 
       list[0].children = list[0].children.filter((item) => data.id !== item.id);
       setAuthData([...authData]);
 
-      let res = await delChildrendData(data.id);
+   await delChildrendData(data.id);
       getAuthData();
-      console.log("第二层权限数据删除", res);
     }
   };
 
   //权限数据更新
   const updateData = async (data) => {
     let res = await updateAuthData(rowid, { title: data.title });
-    console.log("权限数据更新", res);
     getAuthData();
     seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
@@ -103,11 +95,10 @@ export default function AuthList() {
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showDrawer = () => {
+  const showAddDrawer = () => {
     setaddVisible(true);
   };
 
@@ -141,7 +132,7 @@ export default function AuthList() {
   };
 
   //显示修改信息抽屉
-  const showDrawer1 = (r) => {
+  const showEditDrawer = (r) => {
     seteditAddVisible(true);
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
@@ -164,8 +155,7 @@ export default function AuthList() {
   };
   //更新权限按钮
   const onChangeSwitch = async (checked, record) => {
-    console.log("checked", checked);
-    console.log("record", record);
+
     record.auth = checked === 1 ? 0 : 1;
     setAuthData([...authData]);
 
@@ -212,8 +202,8 @@ export default function AuthList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          {console.log("record", record)}
-          <Button type="link" onClick={showDrawer1.bind(this, record)}>
+        
+          <Button type="link" onClick={showEditDrawer.bind(this, record)}>
             修改
           </Button>
           <Popconfirm
@@ -250,7 +240,7 @@ export default function AuthList() {
         {/* <Button
           type="primary"
           style={{ marginLeft: "10px" }}
-          onClick={showDrawer.bind(this)}
+          onClick={showAddDrawer.bind(this)}
         >
           添加权限
         </Button> */}

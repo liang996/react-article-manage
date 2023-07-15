@@ -41,7 +41,6 @@ export default function RoleList() {
   //请求菜单数据
   const getMenuData = async () => {
     let res = await geMenutList("?_embed=children");
-    console.log("res", res);
     res.map((item) => {
       item.title = item.label;
       if (item.children.length > 0) {
@@ -58,7 +57,6 @@ export default function RoleList() {
     let res = await getRoleList();
 
     setRoleData(res);
-    console.log("res111111111111", res);
   };
 
   //角色数据添加
@@ -68,13 +66,11 @@ export default function RoleList() {
       age: 39,
       sex: 1,
     };
-    let res = await addRoleData(data);
-    console.log("角色数据更新", res);
+await addRoleData(data);
     getRoleData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
-    console.log("res", res);
   };
 
   //角色数据删除
@@ -84,12 +80,10 @@ export default function RoleList() {
     setRoleData(roleData.filter((r) => r.id !== data.id));
     getRoleData();
     // getRoleData();
-    //   console.log("角色数据删除", res);
   };
   //角色数据更新
   const updateData = async (data) => {
-    let res = await updateRoleData(rowid, { roleName: data.roleName });
-    console.log("角色数据更新", res);
+ await updateRoleData(rowid, { roleName: data.roleName });
 
     getRoleData();
     seteditAddVisible(false);
@@ -98,11 +92,10 @@ export default function RoleList() {
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showDrawer = () => {
+  const showAddDrawer = () => {
     setaddVisible(true);
   };
 
@@ -136,7 +129,7 @@ export default function RoleList() {
   };
 
   //显示修改信息抽屉
-  const showDrawer1 = (r) => {
+  const showEditDrawer = (r) => {
     seteditAddVisible(true);
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
@@ -159,7 +152,6 @@ export default function RoleList() {
   };
   //显示Modal
   const showModal = (data,id) => {
-    console.log("显示Modal", data,id);
     setIsModalOpen(true);
     setCheckedKeys(data);
     setCheckedId(id);
@@ -188,11 +180,8 @@ export default function RoleList() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onSelect = (selectedKeys, info) => {
-    console.log("selected", selectedKeys, info);
-  };
+
   const onCheck = (checkedKeys, info) => {
-    console.log('checkedKeys :>> ', checkedKeys);
     setCheckedKeys(checkedKeys.checked);
   };
   const columns = [
@@ -213,7 +202,7 @@ export default function RoleList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="link" onClick={showDrawer1.bind(this, record)}>
+          <Button type="link" onClick={showEditDrawer.bind(this, record)}>
             修改
           </Button>
 
@@ -257,7 +246,7 @@ export default function RoleList() {
         {/* <Button
           type="primary"
           style={{ marginLeft: "10px" }}
-          onClick={showDrawer.bind(this)}
+          onClick={showAddDrawer.bind(this)}
         >
           添加角色
         </Button> */}

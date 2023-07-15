@@ -38,7 +38,6 @@ export default function ArticleList() {
   const getArticleData = async () => {
     let res = await getArticleList();
     setArticleData(res);
-    console.log("res111111111111", res);
   };
   //通过文章查查关联的用户  _embed为向下关联，（仅为示例）
   // const getListData = async () => {
@@ -46,15 +45,13 @@ export default function ArticleList() {
   //   //articles：文章表
   //   // let res = await getArticleList();
   //   let res = await getList("?_embed=articles");
-  //   console.log("通过用户表关联文章表数据", res);
   // };
 
   //通过文章查查关联的用户 _expand为向上关联，（仅为示例）
   const getListData = async () => {
     //json-serevr高级用法（表关联查询）：_expand ,如通过文章表获取用户表数据
     // users：用户表 使用_expand为向上关联得用user
-    let res = await getList("?_expand=user");
-    console.log("通过文章查查关联的用户", res);
+await getList("?_expand=user");
   };
   //文章数据添加
   const addArticle = async () => {
@@ -63,29 +60,26 @@ export default function ArticleList() {
       author: "姜帆",
       describe: nanoid(),
     };
-    let res = await addArticleData(data);
-    console.log("文章数据更新", res);
+   await addArticleData(data);
     getArticleData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
 
-    console.log("res", res);
+    //console.log("res", res);
   };
 
   //文章数据删除
   const deleteData = async (data) => {
-    console.log("data", data);
-    let res = await delArticleData(data.id);
+await delArticleData(data.id);
     setArticleData(articleData.filter((r) => r.id !== data.id))
 
     getArticleData();
-    console.log("文章数据删除", res);
+    //console.log("文章数据删除", res);
   };
 
   //文章数据更新
   const updateData = async (data) => {
-    let res = await updateArticleData(rowid, { title: data.title });
-    console.log("文章数据更新", res);
+ await updateArticleData(rowid, { title: data.title });
 
     getArticleData();
     seteditAddVisible(false);
@@ -94,7 +88,6 @@ export default function ArticleList() {
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉

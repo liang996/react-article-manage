@@ -20,7 +20,6 @@ const iconList = {
 
 function MenuList(props) {
   //collapsed：为Boolean ,true为可折叠，反之展开
-  console.log("props", props);
   const [collapsed] = useState(false);
 
   const [MenuData, setMenuData] = useState([]);
@@ -54,9 +53,7 @@ function MenuList(props) {
   //请求菜单数据
   const getMenuData = async () => {
     let res = await getList("?_embed=children");
-    console.log("通过目录表关联的子目录表数据", res);
     let iconMap = renderMenu(res);
-    console.log("iconMap", iconMap);
     setMenuData(iconMap);
   };
 

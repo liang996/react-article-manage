@@ -21,7 +21,6 @@ export default class Jokes extends Component {
   getData = () => {
     getJokesData()
       .then((res) => {
-        console.log('res.data.data :>> ', res.data.data);
         this.setState({
           msg: res.data.data,
         });
