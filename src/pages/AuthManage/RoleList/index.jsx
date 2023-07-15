@@ -139,11 +139,13 @@ await addRoleData(data);
   };
 
   //关闭修改信息对话框
-  const onClose1 = () => {
+  const onEditClose = () => {
     seteditAddVisible(false);
     message.error("取消操作");
   };
-
+  const onSelect = (selectedKeys, info) => {
+    console.log("selected", selectedKeys, info);
+  };
   //关闭新增信息对话框
   const onClose = () => {
     setaddVisible(false);
@@ -277,7 +279,7 @@ await addRoleData(data);
           </Button>
         </Form>
       </Drawer>
-      <Drawer title="修改角色信息" onClose={onClose1} open={editaddVisible}>
+      <Drawer title="修改角色信息" onClose={onEditClose} open={editaddVisible}>
         <Form
           ref={formRef1}
           onFinish={updateData}
@@ -296,7 +298,7 @@ await addRoleData(data);
             />
           </Form.Item>
 
-          <Button onClick={onClose1.bind(this)}>取消</Button>
+          <Button onClick={onEditClose.bind(this)}>取消</Button>
           <Button htmlType="submit" type="primary">
             完成
           </Button>
