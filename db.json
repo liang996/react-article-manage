@@ -2,12 +2,14 @@
   "users": [
     {
       "id": 1,
-      "username": "张三",
+      "username": "admin",
       "age": 11,
       "sex": 0,
+      "password": "admin123456",
+      "phone": "152399865560",
       "roleState": true,
       "default": true,
-      "region": "郑州",
+      "address": "郑州",
       "roleId": 1
     },
     {
@@ -15,6 +17,8 @@
       "username": "李三",
       "age": 21,
       "sex": 1,
+      "password": "123456",
+      "phone": "132399865560",
       "roleState": true,
       "default": false,
       "address": "武汉",
@@ -25,6 +29,8 @@
       "username": "王三",
       "age": 31,
       "sex": 0,
+      "password": "123456",
+      "phone": "182399865560",
       "roleState": true,
       "default": false,
       "address": "北京",
@@ -35,6 +41,8 @@
       "username": "刘三",
       "age": 41,
       "sex": 1,
+      "password": "123456",
+      "phone": "155399865560",
       "roleState": true,
       "default": false,
       "address": "上海",
@@ -45,6 +53,8 @@
       "username": "马三",
       "age": 51,
       "sex": 1,
+      "password": "123456",
+      "phone": "136399865560",
       "roleState": true,
       "default": false,
       "address": "重庆",
@@ -55,36 +65,44 @@
       "username": "赵三",
       "age": 61,
       "sex": 1,
+      "password": "123456",
+      "phone": "132399865577",
       "roleState": true,
       "default": false,
       "address": "广州",
-      "roleId":  3
+      "roleId": 3
     },
     {
       "id": 7,
       "username": "孙三",
       "age": 71,
       "sex": 0,
+      "password": "123456",
+      "phone": "138399865560",
       "roleState": true,
       "default": false,
       "address": "桂林",
-      "roleId":  3
+      "roleId": 3
     },
     {
       "id": 8,
       "username": "周三",
       "age": 81,
       "sex": 0,
+      "password": "123456",
+      "phone": "154399865560",
       "roleState": true,
       "default": false,
       "address": "福建",
-      "roleId":  3
+      "roleId": 3
     },
     {
       "id": 9,
       "username": "吴三",
       "age": 91,
       "sex": 0,
+      "password": "123456",
+      "phone": "186399865560",
       "roleState": true,
       "default": false,
       "address": "深圳",
@@ -95,27 +113,31 @@
       "username": "宋三",
       "age": 27,
       "sex": 1,
+      "password": "123456",
+      "phone": "139399865560",
       "roleState": true,
       "default": false,
       "address": "香港",
-      "roleId":  3
+      "roleId": 3
     },
     {
       "id": 11,
       "username": "沈三",
       "age": 27,
       "sex": 0,
+      "password": "123456",
+      "phone": "188399865560",
       "roleState": true,
       "default": false,
       "address": "台湾",
-      "roleId":  3
+      "roleId": 3
     }
   ],
   "articles": [
     {
       "id": 1,
       "title": "文章类的数据表修改111",
-      "author": "张三",
+      "author": "admin",
       "userId": 1,
       "describe": "json-server可以快速的模拟接口"
     },
