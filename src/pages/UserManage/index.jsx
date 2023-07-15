@@ -17,7 +17,7 @@ import {
   message,
 } from "antd";
 
-export default function UserList() {
+export default function UserManage() {
   const [UserData, setUserData] = useState([]);
 
   const [addVisible, setaddVisible] = useState(false);

@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import MenuHeader from "../../components/MenuHeader";
 import MenuList from "../../components/MenuList";
-import User from "../User/";
+import UserManage from "../UserManage";
 import Weather from "../Weather/Weather";
 import Home from "../Home";
 import ArticleList from "../ArticleManage/ArticleList";
@@ -36,7 +36,7 @@ export default function TemplateList() {
         >
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/user-manage" component={User} />
+            <Route path="/user-manage" component={UserManage} />
             <Route path="/weather-manage" component={Weather} />
 
             <Route

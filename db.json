@@ -4,67 +4,111 @@
       "id": 1,
       "username": "张三",
       "age": 11,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": true,
+      "region": "郑州",
+      "roleId": 1
     },
     {
       "id": 2,
       "username": "李三",
       "age": 21,
-      "sex": 1
+      "sex": 1,
+      "roleState": true,
+      "default": false,
+      "address": "武汉",
+      "roleId": 2
     },
     {
       "id": 3,
       "username": "王三",
       "age": 31,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": false,
+      "address": "北京",
+      "roleId": 2
     },
     {
       "id": 4,
       "username": "刘三",
       "age": 41,
-      "sex": 1
+      "sex": 1,
+      "roleState": true,
+      "default": false,
+      "address": "上海",
+      "roleId": 3
     },
     {
       "id": 5,
       "username": "马三",
       "age": 51,
-      "sex": 1
+      "sex": 1,
+      "roleState": true,
+      "default": false,
+      "address": "重庆",
+      "roleId": 3
     },
     {
       "id": 6,
       "username": "赵三",
       "age": 61,
-      "sex": 1
+      "sex": 1,
+      "roleState": true,
+      "default": false,
+      "address": "广州",
+      "roleId":  3
     },
     {
       "id": 7,
       "username": "孙三",
       "age": 71,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": false,
+      "address": "桂林",
+      "roleId":  3
     },
     {
       "id": 8,
       "username": "周三",
       "age": 81,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": false,
+      "address": "福建",
+      "roleId":  3
     },
     {
       "id": 9,
       "username": "吴三",
       "age": 91,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": false,
+      "address": "深圳",
+      "roleId": 3
     },
     {
       "id": 10,
       "username": "宋三",
       "age": 27,
-      "sex": 1
+      "sex": 1,
+      "roleState": true,
+      "default": false,
+      "address": "香港",
+      "roleId":  3
     },
     {
       "id": 11,
       "username": "沈三",
       "age": 27,
-      "sex": 0
+      "sex": 0,
+      "roleState": true,
+      "default": false,
+      "address": "台湾",
+      "roleId":  3
     }
   ],
   "articles": [
@@ -185,11 +229,7 @@
       "id": 3,
       "roleName": "普通用户",
       "roleType": 3,
-      "rights": [
-        "/home",
-        "/weather-manage",
-        "/article-manage"
-      ]
+      "rights": ["/home", "/weather-manage", "/article-manage"]
     }
   ],
   "catalogues": [
@@ -252,7 +292,7 @@
   ],
   "children": [
     {
-      "id": 1,
+      "id": 9,
       "catalogueId": 4,
       "label": "文章列表",
       "icon": null,
@@ -260,7 +300,7 @@
       "key": "/article-manage/article/list"
     },
     {
-      "id": 2,
+      "id": 11,
       "label": "发布列表",
       "icon": null,
       "catalogueId": 5,
@@ -268,7 +308,7 @@
       "key": "/publish-manage/publish/list"
     },
     {
-      "id": 3,
+      "id": 13,
       "label": "审核列表",
       "icon": null,
       "catalogueId": 6,
@@ -276,7 +316,7 @@
       "key": "/examine-manage/examine/list"
     },
     {
-      "id": 4,
+      "id": 14,
       "label": "权限列表",
       "icon": null,
       "catalogueId": 7,
@@ -284,7 +324,7 @@
       "key": "/auth-manage/auth/List"
     },
     {
-      "id": 5,
+      "id": 15,
       "label": "角色列表",
       "icon": null,
       "catalogueId": 7,

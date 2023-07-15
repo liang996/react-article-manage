@@ -254,13 +254,13 @@ export default function RoleList() {
         <Button style={{ marginLeft: "10px" }} type="primary" onClick={queryfn}>
           查询
         </Button>
-        <Button
+        {/* <Button
           type="primary"
           style={{ marginLeft: "10px" }}
           onClick={showDrawer.bind(this)}
         >
           添加角色
-        </Button>
+        </Button> */}
       </div>
       <Table
         columns={columns}

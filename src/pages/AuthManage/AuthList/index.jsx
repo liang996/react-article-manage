@@ -247,13 +247,13 @@ export default function AuthList() {
         <Button style={{ marginLeft: "10px" }} type="primary" onClick={queryfn}>
           查询
         </Button>
-        <Button
+        {/* <Button
           type="primary"
           style={{ marginLeft: "10px" }}
           onClick={showDrawer.bind(this)}
         >
           添加权限
-        </Button>
+        </Button> */}
       </div>
       <Table
         columns={columns}
