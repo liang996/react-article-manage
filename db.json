@@ -152,8 +152,18 @@
       "roleName": "超级管理员",
       "roleType": 1,
       "rights": [
+        "/home",
+        "/weather-manage",
         "/user-manage",
-        "/home"
+        "/article-manage",
+        "/article-manage/article/list",
+        "/publish-manage",
+        "/publish-manage/publish/list",
+        "/examine-manage",
+        "/examine-manage/examine/list",
+        "/auth-manage",
+        "/auth-manage/auth/List",
+        "/auth-manage/role/List"
       ]
     },
     {
@@ -161,7 +171,15 @@
       "roleName": "普通管理员",
       "roleType": 2,
       "rights": [
-        "/home"
+        "/home",
+        "/weather-manage",
+        "/article-manage",
+        "/article-manage/article/list",
+        "/publish-manage",
+        "/publish-manage/publish/list",
+        "/examine-manage",
+        "/examine-manage/examine/list"
+
       ]
     },
     {
@@ -169,7 +187,9 @@
       "roleName": "普通用户",
       "roleType": 3,
       "rights": [
-        "/home"
+        "/home",
+        "/weather-manage",
+        "/article-manage"
       ]
     }
   ],
@@ -178,7 +198,7 @@
       "id": 1,
       "label": "首页",
       "icon": null,
-      "auth": 1,
+      "auth": 0,
       "grade": 1,
       "key": "/home"
     },

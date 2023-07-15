@@ -22,7 +22,7 @@ import {
 export default function RoleList() {
   const [roleData, setRoleData] = useState([]);
   const [MenuData, setMenuData] = useState([]);
-
+  const [checkedKeys, setCheckedKeys] = useState([]);
   const [addVisible, setaddVisible] = useState(false);
   const [editaddVisible, seteditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
@@ -156,8 +156,10 @@ export default function RoleList() {
     message.error("取消操作");
   };
   //显示Modal
-  const showModal = () => {
+  const showModal = (data) => {
+    console.log("显示Modal", data);
     setIsModalOpen(true);
+    setCheckedKeys(data);
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -171,6 +173,7 @@ export default function RoleList() {
   };
   const onCheck = (checkedKeys, info) => {
     console.log("onCheck", checkedKeys, info);
+    setCheckedKeys(checkedKeys);
   };
   const columns = [
     {
@@ -204,7 +207,11 @@ export default function RoleList() {
             <a style={{ color: "#fa8c16" }}>删除</a>
           </Popconfirm>
 
-          <Button type="link" style={{ color: "green" }} onClick={showModal}>
+          <Button
+            type="link"
+            style={{ color: "green" }}
+            onClick={() => showModal(record.rights)}
+          >
             目录列表
           </Button>
         </Space>
@@ -297,6 +304,8 @@ export default function RoleList() {
           checkable
           onSelect={onSelect}
           onCheck={onCheck}
+          checkedKeys={checkedKeys}
+          checkStrictly={true}
           treeData={MenuData}
         />
       </Modal>
