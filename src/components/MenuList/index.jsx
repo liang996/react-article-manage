@@ -29,6 +29,7 @@ function MenuList(props) {
     getMenuData();
   }, []);
 
+  //根据数据遍历列表
   const checkAuth = (item) => item.auth === 1;
   const renderMenu = (menuList) => {
     return (
@@ -48,6 +49,8 @@ function MenuList(props) {
       })
     );
   };
+
+
   //请求菜单数据
   const getMenuData = async () => {
     let res = await getList("?_embed=children");

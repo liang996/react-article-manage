@@ -109,28 +109,28 @@
       "roleId": 3
     },
     {
-      "id": 10,
-      "username": "宋三",
-      "age": 27,
+      "username": "嘎嘎嘎",
+      "password": "13",
       "sex": 1,
-      "password": "123456",
-      "phone": "139399865560",
+      "age": "34",
+      "address": "台湾",
+      "phone": "13899001125",
+      "roleId": 3,
       "roleState": true,
       "default": false,
-      "address": "香港",
-      "roleId": 3
+      "id": 10
     },
     {
-      "id": 11,
-      "username": "沈三",
-      "age": 27,
+      "username": "顶顶顶",
+      "password": "112",
       "sex": 0,
-      "password": "123456",
-      "phone": "188399865560",
+      "age": "32",
+      "address": "台湾",
+      "phone": "13899001199",
+      "roleId": 2,
       "roleState": true,
       "default": false,
-      "address": "台湾",
-      "roleId": 3
+      "id": 11
     }
   ],
   "articles": [
@@ -196,20 +196,6 @@
       "author": "吴三",
       "describe": "要做的就是根据这个数据结构生成吴三",
       "id": 9
-    },
-    {
-      "userId": 10,
-      "title": "中国载人登月初步方案公布宋三",
-      "author": "宋三",
-      "describe": "要做的就是根据这个数据结构生成宋三",
-      "id": 10
-    },
-    {
-      "userId": 11,
-      "title": "中国载人登月初步方案公布沈三",
-      "author": "沈三",
-      "describe": "要做的就是根据这个数据结构生成沈三",
-      "id": 11
     }
   ],
   "roles": [
@@ -251,7 +237,11 @@
       "id": 3,
       "roleName": "普通用户",
       "roleType": 3,
-      "rights": ["/home", "/weather-manage", "/article-manage"]
+      "rights": [
+        "/home",
+        "/weather-manage",
+        "/article-manage"
+      ]
     }
   ],
   "catalogues": [

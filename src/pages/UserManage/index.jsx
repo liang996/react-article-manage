@@ -24,12 +24,12 @@ import {
 } from "antd";
 
 export default function UserManage() {
-  const [UserData, setUserData] = useState([]);
-  const [userInfo, setuserInfo] = useState({});
+  const [userData, setUserData] = useState([]);
   const [roleData, setRoleData] = useState([]); //角色数据
+  const [isUpData, setIsUpData] = useState(false);
 
-  const [addVisible, setaddVisible] = useState(false);
-  const [editaddVisible, seteditAddVisible] = useState(false);
+  const [addVisible, setAddVisible] = useState(false);
+  const [editaddVisible, setEditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
 
   const [rowid, setRowid] = useState(null);
@@ -40,20 +40,6 @@ export default function UserManage() {
     getUserArticlesData();
   }, []);
 
-  //请求用户数据
-
-  // const getUserData = async () => {
-  //   let res = await getUserList();
-  //   setUserData(res);
-  //   console.log("res111111111111", res);
-  // };
-  // //通过用户查关联的文章数据  _embed为向下关联，（仅为示例）
-  // const getUserArticlesData = async () => {
-  //   let res = await getList("?_embed=articles");
-  //   console.log("通过用户表关联文章表数据", res);
-  // };
-
-  // };
   //通过用户查关联的角色信息
   const getUserArticlesData = async () => {
     let res = await getList("?_expand=role");
@@ -61,8 +47,7 @@ export default function UserManage() {
     setUserData(res);
   };
   //请求角色数据
-  // value: "jack",
-  // label: "Jack",
+
   const getRoleData = async () => {
     let res = await getRoleList();
 
@@ -77,50 +62,48 @@ export default function UserManage() {
   };
 
   //用户数据添加
-  const addUser = async () => {
-    console.log("userInfo", userInfo);
-    //   const data = {
-    //     username: `王小虎`,
-    //     age: 39,
-    //     sex: 1,
-    //   };
-    //   let res = await addUserData(data);
-    //   console.log("用户数据更新", res);
-    //   getUserArticlesData();
-    //   setaddVisible(false);
-    //   formRef.current.resetFields(); //修改成功后清空输入框中的数据
+  const addUser = () => {
+    console.log("用户数据添加11111", formRef);
+    formRef.current.validateFields().then(async (res) => {
+      let addData = await addUserData({
+        ...res,
+        roleState: true,
+        default: false,
+      });
+      console.log("addaccse", addData);
+      //清空输入框
+      formRef.current.resetFields();
+      //   setUserData([...userData, {
+      //     ...addData,
+      //     //给users添加上role中对应的属性
+      //     role: roleData.filter(data => res.roleId === data.id)[0]
+      // }]);
+      getUserArticlesData();
 
-    //   console.log("res", res);
+      // setUserData([...userData]);
+      setAddVisible(false);
+    });
   };
 
   //用户数据删除
   const deleteData = async (data) => {
     console.log("data", data);
-    let res = await delUserData(data.id);
+    await delUserData(data.id);
+    //删除完成重新查数据
     getUserArticlesData();
-    console.log("用户数据删除", res);
+    // setUserData(userData.filter(item => data.id !== item.id))
   };
 
   //用户数据更新
-  const updateData = async (data) => {
-    let res = await updateUserData(rowid, { username: data.username });
-    console.log("用户数据更新", res);
-
+  const updateUser = async (data) => {
+    await updateUserData(rowid, {
+      ...data,
+      roleState: true,
+      default: false,
+    });
     getUserArticlesData();
-    seteditAddVisible(false);
+    setEditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
-  };
-  //新增信息时的Input输入框事件
-  const handleChange = (e) => {
-    setuserInfo({
-      [e.target.id]: e.target.value,
-    });
-  };
-  //修改信息时的Input输入框事件
-  const handleChange1 = (e) => {
-    setuserInfo({
-      [e.target.id]: e.target.value,
-    });
   };
 
   //新增、修改数据时提交失败时的提示信息
@@ -129,8 +112,12 @@ export default function UserManage() {
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showDrawer = () => {
-    setaddVisible(true);
+  const showAddDrawer = () => {
+    setTimeout(() => {
+      setIsUpData(false);
+      setAddVisible(true);
+      formRef.current.resetFields();
+    }, 0);
   };
 
   const updateState = (e) => {
@@ -143,7 +130,7 @@ export default function UserManage() {
     window.timer = setTimeout(() => {
       //搜索框输入值，就按搜索查
       if (seachValue.length > 0) {
-        let data = UserData.filter((r) => r.username === seachValue);
+        let data = userData.filter((r) => r.username === seachValue);
         if (data.length !== 0) {
           setUserData(data);
         } else {
@@ -163,8 +150,10 @@ export default function UserManage() {
   };
 
   //显示修改信息抽屉
-  const showDrawer1 = (r) => {
-    seteditAddVisible(true);
+  const showEditDrawer = (r) => {
+    setEditAddVisible(true);
+    setIsUpData(true);
+
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
     setTimeout(() => {
@@ -173,8 +162,8 @@ export default function UserManage() {
   };
 
   //关闭修改信息对话框
-  const onClose1 = () => {
-    seteditAddVisible(false);
+  const onEditClose = () => {
+    setEditAddVisible(false);
     message.error("取消操作");
   };
   const SelectChange = (value) => {
@@ -182,8 +171,8 @@ export default function UserManage() {
   };
 
   //关闭新增信息对话框
-  const onClose = () => {
-    setaddVisible(false);
+  const onAddClose = () => {
+    setAddVisible(false);
 
     message.error("取消操作");
   };
@@ -231,7 +220,7 @@ export default function UserManage() {
         <Space size="middle">
           <Button
             type="link"
-            onClick={showDrawer1.bind(this, record)}
+            onClick={showEditDrawer.bind(this, record)}
             disabled={record.default}
           >
             修改
@@ -239,14 +228,13 @@ export default function UserManage() {
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
-            onCancel={onClose.bind(this)}
+            onCancel={onAddClose.bind(this)}
             okText="确定"
             cancelText="取消"
           >
             <Button
               type="link"
               style={{ color: "#fa8c16" }}
-              onClick={showDrawer1.bind(this, record)}
               disabled={record.default}
             >
               删除
@@ -262,7 +250,7 @@ export default function UserManage() {
         <Input
           placeholder="请根据姓名查找用户信息"
           style={{ marginLeft: "10px", width: "20%" }}
-          value={userInfo.seachValue}
+          value={seachValue}
           onChange={updateState}
         />
         <Button onClick={clear} style={{ marginLeft: "10px" }}>
@@ -275,132 +263,30 @@ export default function UserManage() {
         <Button
           type="primary"
           style={{ marginLeft: "10px" }}
-          onClick={showDrawer.bind(this)}
+          onClick={showAddDrawer.bind(this)}
         >
           添加用户
         </Button>
       </div>
       <Table
         columns={columns}
-        dataSource={UserData}
+        dataSource={userData}
         rowKey={(item) => item.id}
       />
-      <Drawer title="添加用户信息" onClose={onClose} open={addVisible}>
-        <UserForm
-          userInfo={userInfo}
-          roleData={roleData}
-          formRef={formRef}
-          addUser={addUser}
-          onFinishFailed={onFinishFailed}
-          handleChange={handleChange}
-          onClose={onClose}
-          SelectChange={SelectChange}
-        />
-      </Drawer>
-      <Drawer title="修改用户信息" onClose={onClose1} open={editaddVisible}>
-        <UserForm
-          userInfo={userInfo}
-          roleData={roleData}
-          formRef={formRef}
-          addUser={addUser}
-          onFinishFailed={onFinishFailed}
-          handleChange={handleChange}
-          onClose={onClose}
-          SelectChange={SelectChange}
-        />
-        {/* <Form
-          ref={formRef1}
-          onFinish={updateData}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            name="username"
-            label="姓名"
-            rules={[{ required: true, message: "请输入姓名" }]}
-          >
-            <Input
-              placeholder="请输入"
-              id="username"
-              value={userInfo.username}
-              onChange={handleChange1}
-              title="输入2-6位中文汉字"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="密码"
-            rules={[{ required: true, message: "请输入您的密码" }]}
-          >
-            <Input
-              placeholder="请输入您的密码"
-              id="password"
-              value={userInfo.password}
-              onChange={handleChange1}
-            />
-          </Form.Item>
-          <Form.Item
-            name="sex"
-            label="性别"
-            rules={[{ required: true, message: "请输入您的性别" }]}
-          >
-            <Input
-              placeholder="请输入您的性别"
-              id="sex"
-              value={userInfo.sex}
-              onChange={handleChange1}
-              pattern="^[男|女]{1}$"
-              title="输入男或女"
-            />
-          </Form.Item>
-          <Form.Item
-            name="age"
-            label="年龄"
-            rules={[{ required: true, message: "请输入您的年龄" }]}
-          >
-            <Input
-              placeholder="请输入您的年龄"
-              id="age"
-              value={userInfo.age}
-              onChange={handleChange1}
-              pattern="^(?:[1-9][0-9]?|1[01][0-9]|120)$"
-              title="输入1-120之间的数字"
-            />
-          </Form.Item>
-          <Form.Item
-            name="address"
-            label="住址"
-            rules={[{ required: true, message: "请输入您的住址" }]}
-          >
-            <Input
-              placeholder="请输入您的住址"
-              id="address"
-              value={userInfo.address}
-              onChange={handleChange1}
-              pattern="[\u4e00-\u9fa5]{1,100}$"
-              title="输入有效中文汉字"
-            />
-          </Form.Item>
-          <Form.Item
-            name="phone"
-            label="电话"
-            rules={[{ required: true, message: "请输入您的电话" }]}
-          >
-            <Input
-              placeholder="请输入11位电话"
-              id="phone"
-              value={userInfo.phone}
-              onChange={handleChange1}
-              pattern="^1[0-9]{10}$"
-              title="输入1开头的11位有效手机号"
-            />
-          </Form.Item>
 
-          <Button onClick={onClose1.bind(this)}>取消</Button>
-          <Button htmlType="submit" type="primary">
-            完成
-          </Button>
-        </Form> */}
+      <Drawer
+        title={isUpData ? "更新用户信息" : "添加用户信息"}
+        onClose={isUpData ? onEditClose : onAddClose}
+        open={isUpData ? editaddVisible : addVisible}
+      >
+        <UserForm
+          roleData={roleData}
+          ref={isUpData ? formRef1 : formRef}
+          onFinish={isUpData ? updateUser : addUser}
+          onFinishFailed={onFinishFailed}
+          onClose={isUpData ? onEditClose : onAddClose}
+          SelectChange={SelectChange}
+        />
       </Drawer>
     </div>
   );
