@@ -11,6 +11,10 @@ export const getList = (params) => {
 export const addUserData = (params) => {
     return postData("/users",params)
 };
+//用户详情查询 
+export const getUserInfo = (params) => {
+    return fetchData(`/users${params}`)
+};
 //用户删除
 export const delUserData = (id) => {
     return deleteData(`/users/${id}`)

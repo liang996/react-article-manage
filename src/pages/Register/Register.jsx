@@ -237,7 +237,7 @@ export default class register extends Component {
           </div> */}
           </div>
           <div className={styleModule.msg } style={{textAlign:"center",paddingTop:"10px"}}>
-            已有账号? <Link to="/login">去登入</Link>
+            已有账号? <Link to="/login">去登录</Link>
           </div>
         </div>
       </div>
