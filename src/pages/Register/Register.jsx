@@ -7,7 +7,7 @@ import { addUserData, getUserInfo } from "../../api/asyncVersion/user";
 import styleModule from "./Register.module.scss";
 export default class register extends Component {
   state = {
-    userName: "",
+    username: "",
     password: "",
     options: {
       // "background": {
@@ -168,45 +168,51 @@ export default class register extends Component {
     console.log("123", container);
   };
   isRegister = async () => {
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
     //判断输入内容是否为空
-    if (userName.trim() === "" || password.trim() === "") {
+    if (username.trim() === "" || password.trim() === "") {
       message.error("输入内容不能为空");
 
       return; //拦截
-    }else{
-    let data = {
-      userName,
-      password,
-    };
-    console.log("data :>> ", data);
-    let userData = await getUserInfo(
-      `?username=${userName}&password=${password}&roleState=true&_expand=role`
-    );
-    console.log("userData", userData);
-
-    if (userData[0]?.username === userName) {
-      message.error("当前用户已被注册使用,请前往登录");
-      localStorage.setItem("userData", JSON.stringify(data));
-
-      return;
     } else {
-      await addUserData({
-        userName,
+      let data = {
+        username,
         password,
-        age: 0,
-        sex: 0,
-        phone: "",
-        roleState: true,
-        address: "",
-        roleId: 3,
-        default: false,
-      });
-      localStorage.setItem("userData", JSON.stringify(data));
-      message.success("注册成功，去登录");
-      this.props.history.push("/login");
+      };
+      console.log("data :>> ", data);
+      let userData = await getUserInfo(
+        `?username=${username}&password=${password}&roleState=true&_expand=role`
+      );
+      console.log("userData", userData);
+
+      if (userData[0]?.username === username) {
+        message.error("当前用户已被注册使用,请前往登录");
+        localStorage.setItem("userData", JSON.stringify(data));
+
+        return;
+      } else {
+        //Math.floor(Math.random()*10)可均衡获取 0 到 9 的随机整数。
+        // Math.random()>0.5?1:0; 可均衡获取 0 or 1 的随机整数。
+        //Math.floor(Math.random() * (100 - 0)) + 0  可均衡获取 0 到 100 的随机整数。
+        const addressArr = ['北京','武汉','成都','重庆','深圳','郑州','黄石','宁波','西安'];
+
+        const item = addressArr[Math.floor(Math.random()*addressArr.length)];
+        await addUserData({
+          username,
+          password,
+          age: Math.floor(Math.random() * (100 - 0)) + 0,
+          sex: Math.random() > 0.5 ? 1 : 0,
+          phone: `1820721101${Math.floor(Math.random() * 10)}`,
+          roleState: true,
+          address: item,
+          roleId: 3, //默认普通用户角色
+          default: false,
+        });
+        localStorage.setItem("userData", JSON.stringify(data));
+        message.success("注册成功，去登录");
+        this.props.history.push("/login");
+      }
     }
-  }
   };
   render() {
     return (
@@ -226,7 +232,7 @@ export default class register extends Component {
               name="username"
               placeholder="请输入账号"
               className={styleModule["input-item"]}
-              onChange={this.saveFormData("userName")}
+              onChange={this.saveFormData("username")}
             />
             密码：
             <input

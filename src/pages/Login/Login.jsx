@@ -8,7 +8,7 @@ import styleModule from "./Login.module.scss";
 import { getUserInfo } from "../../api/asyncVersion/user";
 export default class Login extends Component {
   state = {
-    userName: "",
+    username: "",
     password: "",
     options: {
       // "background": {
@@ -171,37 +171,38 @@ export default class Login extends Component {
     };
   };
   isLogin = async () => {
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
+    let user = JSON.parse(localStorage.getItem("userData")) || {};
 
     //判断输入内容是否为空
-    if (userName.trim() === "" || password.trim() === "") {
+    if (username.trim() === "" || password.trim() === "") {
       message.error("输入内容不能为空");
 
       return; //拦截
     } else {
       // //传递search参数
       // this.props.history.push(
-      //   `/home?userName=${userName}&password=${password}`
+      //   `/home?username=${username}&password=${password}`
       // );
       //传递query参数
 
       // this.props.history.push({
       //   pathname: "/home",
-      //   query: { userName, password },
+      //   query: { username, password },
       // });
       let userData = await getUserInfo(
-        `?username=${userName}&password=${password}&roleState=true&_expand=role`
+        `?username=${username}&password=${password}&roleState=true&_expand=role`
       );
-      if (userData.length === 0) {
+      if (userData.length === 0||Object.keys(user).length === 0 ) {
         message.error("您还未注册，请先注册");
         return; //拦截
-      } else {
+      } else if(userData.length !== 0&&Object.keys(user).length > 0 ){
         localStorage.setItem("token", nanoid());
 
         //传递state参数
         this.props.history.push({
           pathname: "/home",
-          state: { userName, password },
+          state: { username, password },
         });
         // props.history.push("/")
       }
@@ -225,7 +226,7 @@ export default class Login extends Component {
               name="username"
               placeholder="请输入账号"
               className={styleModule["input-item"]}
-              onChange={this.saveFormData("userName")}
+              onChange={this.saveFormData("username")}
             />
             密码：
             <input
