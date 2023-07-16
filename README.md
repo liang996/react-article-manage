@@ -72,7 +72,10 @@ npm  run  eject
 ```
  https://blog.csdn.net/weixin_48813932/article/details/124624103 
  ```
-
+ ##  【前端react 粒子特效】
+```
+https://blog.csdn.net/weixin_54127208/article/details/124380211
+```
 ## 问题记录
 1.暂时权限列表控制子目录，不起作用
 2.ResizeObserver loop limit exceeded 删除功能偶尔会报

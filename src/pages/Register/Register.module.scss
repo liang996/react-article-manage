@@ -2,8 +2,7 @@
   height: 100%;
   background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
   overflow: hidden;
-
-  .login-wrapper {
+  .register-wrapper {
     background-color: #fff;
     width: 400px;
     height: 500px;
@@ -14,12 +13,14 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;
+
     .header {
       font-size: 30px;
       font-weight: bold;
       text-align: center;
       line-height: 170px;
     }
+
     .form-wrapper {
       .input-item {
         display: block;
@@ -31,9 +32,11 @@
         font-size: 15px;
         outline: none;
       }
+
       .input-item::placeholder {
         text-transform: uppercase;
       }
+
       .btn {
         text-align: center;
         padding: 5px;
@@ -43,13 +46,14 @@
         background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
         color: #fff;
       }
+
       .msg {
         text-align: center;
         line-height: 80px;
       }
+
       .msg a {
         text-decoration-line: none;
-
         color: #a6c1ee;
       }
     }
