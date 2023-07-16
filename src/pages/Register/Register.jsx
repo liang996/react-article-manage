@@ -200,7 +200,7 @@ export default class register extends Component {
         await addUserData({
           username,
           password,
-          age: Math.floor(Math.random() * (100 - 0)) + 0,
+          age: Math.floor(Math.random() * (100 - 1)) + 1,
           sex: Math.random() > 0.5 ? 1 : 0,
           phone: `1820721101${Math.floor(Math.random() * 10)}`,
           roleState: true,
