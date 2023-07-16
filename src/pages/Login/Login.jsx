@@ -170,25 +170,12 @@ export default class Login extends Component {
       this.setState({ [dataType]: e.target.value });
     };
   };
-  isLogin = () => {
+  isLogin = async () => {
     const { userName, password } = this.state;
-    let user = JSON.parse(localStorage.getItem("userData")) || {};
-    console.log("user :>> ", user);
 
     //判断输入内容是否为空
     if (userName.trim() === "" || password.trim() === "") {
       message.error("输入内容不能为空");
-
-      return; //拦截
-    } else if (Object.keys(user).length === 0) {
-      message.error("您还未注册，请先注册");
-
-      return; //拦截
-    } else if (
-      Object.keys(user).length > 0 &&
-      (userName !== user.userName || password !== user.password)
-    ) {
-      message.error("您还未注册，请先注册");
 
       return; //拦截
     } else {
@@ -202,16 +189,22 @@ export default class Login extends Component {
       //   pathname: "/home",
       //   query: { userName, password },
       // });
-      getUserInfo(
+      let userData = await getUserInfo(
         `?username=${userName}&password=${password}&roleState=true&_expand=role`
       );
-      localStorage.setItem("token", nanoid());
+      if (userData.length === 0) {
+        message.error("您还未注册，请先注册");
+        return; //拦截
+      } else {
+        localStorage.setItem("token", nanoid());
 
-      //传递state参数
-      this.props.history.push({
-        pathname: "/home",
-        state: { userName, password },
-      });
+        //传递state参数
+        this.props.history.push({
+          pathname: "/home",
+          state: { userName, password },
+        });
+        // props.history.push("/")
+      }
     }
   };
   render() {

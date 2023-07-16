@@ -3,13 +3,13 @@
     {
       "id": 1,
       "username": "admin",
-      "age": 11,
+      "age": 27,
       "sex": 0,
-      "password": "admin123456",
+      "password": "admin",
       "phone": "152399865560",
       "roleState": true,
       "default": true,
-      "address": "郑州",
+      "address": "荆州",
       "roleId": 1
     },
     {
@@ -109,7 +109,7 @@
       "roleId": 3
     },
     {
-      "username": "嘎嘎嘎",
+      "username": "张天浩",
       "password": "13",
       "sex": 1,
       "age": "34",
@@ -121,77 +121,18 @@
       "id": 10
     },
     {
-      "username": "顶顶顶",
-      "password": "112",
-      "sex": 0,
-      "age": "32",
-      "address": "台湾",
-      "phone": "13899001199",
-      "roleId": 2,
+      "username": "徐少杰",
+      "password": "13",
+      "sex": 1,
+      "age": "34",
+      "address": "北京",
+      "phone": "13899001125",
+      "roleId": 3,
       "roleState": true,
       "default": false,
       "id": 11
-    },
-    {
-      "userName": "machao",
-      "password": "ma123456",
-      "age": 0,
-      "sex": 0,
-      "phone": "",
-      "roleState": true,
-      "address": "",
-      "roleId": 3,
-      "default": false,
-      "id": 12
-    },
-    {
-      "userName": "machao",
-      "password": "ma123456",
-      "age": 0,
-      "sex": 0,
-      "phone": "",
-      "roleState": true,
-      "address": "",
-      "roleId": 3,
-      "default": false,
-      "id": 13
-    },
-    {
-      "userName": "admin",
-      "password": "admin123456",
-      "age": 0,
-      "sex": 0,
-      "phone": "",
-      "roleState": true,
-      "address": "",
-      "roleId": 3,
-      "default": false,
-      "id": 14
-    },
-    {
-      "userName": "admin",
-      "password": "admin123456",
-      "age": 0,
-      "sex": 0,
-      "phone": "",
-      "roleState": true,
-      "address": "",
-      "roleId": 3,
-      "default": false,
-      "id": 15
-    },
-    {
-      "userName": "admin",
-      "password": "admin123456",
-      "age": 0,
-      "sex": 0,
-      "phone": "",
-      "roleState": true,
-      "address": "",
-      "roleId": 3,
-      "default": false,
-      "id": 16
     }
+    
   ],
   "articles": [
     {
