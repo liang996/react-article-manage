@@ -145,6 +145,48 @@
       "id": 12
     }
   ],
+  "categorys": [
+    {
+      "id": 1,
+      "title": "前端",
+      "value": "前端"
+    },
+    {
+      "id": 2,
+      "title": "后端",
+      "value": "后端"
+    },
+    {
+      "id": 3,
+      "title": "人工智能",
+      "value": "人工智能"
+    },
+    {
+      "id": 4,
+      "title": "阅读",
+      "value": "阅读"
+    },
+    {
+      "id": 5,
+      "title": "ios",
+      "value": "ios"
+    },
+    {
+      "id": 6,
+      "title": "Android",
+      "value": "Android"
+    },
+    {
+      "id": 7,
+      "title": "开发工具",
+      "value": "开发工具"
+    },
+    {
+      "id": 8,
+      "title": "综合",
+      "value": "综合"
+    }
+  ],
   "articles": [
     {
       "id": 1,
@@ -152,7 +194,7 @@
       "author": "admin",
       "userId": 1,
       "roleId": 1,
-
+      "categoryId": 1,
       "describe": "json-server可以快速的模拟接口",
       "star": 1020,
       "view": 2065,
@@ -165,6 +207,7 @@
       "id": 2,
       "title": "中国载人登月初步方案公布",
       "author": "李三",
+      "categoryId": 2,
       "userId": 2,
       "roleId": 1,
       "describe": "json-server可以快速的模拟接口",
@@ -180,6 +223,7 @@
       "title": "点亮夜间经济 提升城市活力",
       "author": "王三",
       "userId": 3,
+      "categoryId": 2,
       "describe": "新建一个文件夹，名字随意",
       "star": 1020,
       "view": 2065,
@@ -195,6 +239,7 @@
       "author": "刘三",
       "userId": 4,
       "roleId": 2,
+      "categoryId": 3,
       "describe": "名字随意",
       "star": 1020,
       "view": 2065,
@@ -212,6 +257,7 @@
       "describe": "在当前文件夹，执行启动json-server的服务",
       "star": 1020,
       "view": 2065,
+      "categoryId": 3,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
       "auditState": 2,
@@ -225,6 +271,7 @@
       "describe": "json-server 模拟接口请求 搭配 mock.js 接口的增删改查",
       "star": 1020,
       "view": 2065,
+      "categoryId": 4,
       "roleId": 2,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
@@ -239,6 +286,7 @@
       "describe": "Java读取json文件并对json数据进行读取、添加、删除与修改操作",
       "star": 1020,
       "view": 2065,
+      "categoryId": 5,
       "roleId": 3,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
@@ -252,6 +300,7 @@
       "describe": "要做的就是根据这个数据结构生成T周三",
       "star": 1020,
       "view": 2065,
+      "categoryId": 6,
       "roleId": 3,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
@@ -267,6 +316,7 @@
       "star": 1020,
       "view": 2065,
       "roleId": 3,
+      "categoryId": 7,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
       "auditState": 2,
@@ -284,6 +334,7 @@
         "/user-manage",
         "/article-manage",
         "/article-manage/article/list",
+        "/article-manage/category/list",
         "/article-manage/article/add",
         "/publish-manage",
         "/publish-manage/publish/list",
@@ -306,9 +357,8 @@
         "/article-manage",
         "/article-manage/article/list",
         "/article-manage/article/add",
-
+        "/article-manage/category/list",
         "/article-manage/article/add",
-
         "/publish-manage",
         "/publish-manage/publish/list",
         "/examine-manage",
@@ -403,6 +453,14 @@
       "icon": null,
       "auth": 1,
       "key": "/article-manage/article/add"
+    },
+    {
+      "id": 17,
+      "catalogueId": 4,
+      "label": "文章类别列表",
+      "icon": null,
+      "auth": 1,
+      "key": "/article-manage/category/list"
     },
     {
       "id": 11,

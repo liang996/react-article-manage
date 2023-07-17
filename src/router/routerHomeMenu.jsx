@@ -7,6 +7,8 @@ import Weather from "../pages/Weather/Weather";
 import Home from "../pages/Home";
 import ArticleList from "../pages/ArticleManage/ArticleList";
 import ArticleAdd from "../pages/ArticleManage/ArticleAdd";
+import CategoryList from "../pages/ArticleManage/CategoryList";
+
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import AuthList from "../pages/AuthManage/AuthList";
 import RoleList from "../pages/AuthManage/RoleList";
@@ -17,6 +19,7 @@ const routerList = {
   "/user-manage": UserManage,
   "/article-manage/article/list": ArticleList,
   "/article-manage/article/add": ArticleAdd,
+  "/article-manage/category/list": CategoryList,
   "/publish-manage/publish/list": PublishList,
   "/examine-manage/examine/list": ExamineList,
   "/auth-manage/auth/List": AuthList,
