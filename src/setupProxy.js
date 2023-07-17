@@ -17,10 +17,15 @@ module.exports = function (app) {
       changeOrigin: true,
       pathRewrite: { '^/duanzi': '' }
     }),
-    createProxyMiddleware('/weathers', {
+    createProxyMiddleware('/city', {
       target: 'https://geoapi.qweather.com',
       changeOrigin: true,
-      pathRewrite: { '^/weathers': '' }
+      pathRewrite: { '^/city': '' }
+    }),
+    createProxyMiddleware('/weather', {
+      target: 'https://devapi.qweather.com',
+      changeOrigin: true,
+      pathRewrite: { '^/weather': '' }
     }),
     createProxyMiddleware('/wen', {
       target: 'http://localhost:8001',

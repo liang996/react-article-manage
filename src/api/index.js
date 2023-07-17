@@ -10,7 +10,7 @@ import instance from "../utils/request";
 // 天气列表查询(查城市)
 export const getCityData = (params) => {
     return instance.request({
-        url: "/weathers/v2/city/lookup",
+        url: "/city/v2/city/lookup",
         method: "GET",
         params
     });
@@ -18,7 +18,7 @@ export const getCityData = (params) => {
 // 天气列表查询(查天气) 使用和风天气api
 export const getWeatherData = (params) => {
     return instance.request({
-        url: "/weathers/v7/weather/3d",
+        url: "/weather/v7/weather/3d",
         method: "GET",
         params
     });
