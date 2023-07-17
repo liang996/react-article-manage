@@ -22,3 +22,8 @@
   #root,.ant-layout  {
   height: 100%;
   }
+  #nprogress .bar {
+
+    background: #1DA57A !important; 
+  
+  }

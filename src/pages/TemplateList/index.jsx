@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import NProgress from "nprogress";
 import { Layout } from "antd";
 import MenuHeader from "../../components/MenuHeader";
 import MenuList from "../../components/MenuList";
 import RouterHomeMenu from "../../router/routerHomeMenu";
-
+import "nprogress/nprogress.css";
 import "./index.css";
 
 const { Content } = Layout;
 
 export default function TemplateList() {
+  //路由切换进度条使用
+  NProgress.start();
+  useEffect(() => {
+    NProgress.done();
+  });
   return (
     <Layout>
       <MenuList></MenuList>
@@ -24,7 +30,7 @@ export default function TemplateList() {
             overflow: "auto",
           }}
         >
-          <RouterHomeMenu/>
+          <RouterHomeMenu />
         </Content>
       </Layout>
     </Layout>
