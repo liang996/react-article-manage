@@ -3,29 +3,40 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
-import { Layout, Dropdown,  Space, Avatar } from "antd";
-import React, { useState } from "react";
+import { Layout, Dropdown, Space, Avatar } from "antd";
+import React, { useEffect, useState } from "react";
 import { removeToken } from "../../utils/common";
 
 const { Header } = Layout;
 
 export default function MenuHeader() {
   const [collapsed, setCollapsed] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("userInfoData"));
+    console.log('data', data)
+    setUserInfo(data);
+  }, []);
   const changeFoldOutlined = () => {
     setCollapsed(!collapsed);
   };
 
   const onClick = ({ key }) => {
-    removeToken();
-    window.location.href = "/login";
-    // if (key ==1) {
-    // }
+    if (key*1 ===2) {
+      removeToken();
+      window.location.href = "/login";
+    }
   };
 
   const items = [
     {
-      label: "退出登录",
+      label:userInfo?.role?.roleName,
       key: 1,
+    },
+    {
+      label: "退出登录",
+      key: 2,
     },
     // ,
     // {
@@ -64,7 +75,7 @@ export default function MenuHeader() {
                   backgroundColor: "#f56a00",
                 }}
               >
-                admin
+                {userInfo.username}
               </Avatar>
             </span>
             <DownOutlined />

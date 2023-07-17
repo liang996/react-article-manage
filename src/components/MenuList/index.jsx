@@ -23,13 +23,13 @@ function MenuList(props) {
   const [collapsed] = useState(false);
 
   const [MenuData, setMenuData] = useState([]);
-
+  let currentUser = JSON.parse(localStorage.getItem("userInfoData"));
   useEffect(() => {
     getMenuData();
   }, []);
 
   //根据数据遍历列表
-  const checkAuth = (item) => item.auth === 1;
+  const checkAuth = (item) => item.auth === 1 && (currentUser.role.rights).includes(item.key);
   const renderMenu = (menuList) => {
     return (
       menuList &&

@@ -76,7 +76,7 @@ await addRoleData(data);
   //角色数据删除
 
   const deleteData = async (data) => {
-    let res = await delRoleData(data.id);
+   await delRoleData(data.id);
     setRoleData(roleData.filter((r) => r.id !== data.id));
     getRoleData();
     // getRoleData();
@@ -95,9 +95,9 @@ await addRoleData(data);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showAddDrawer = () => {
-    setaddVisible(true);
-  };
+  // const showAddDrawer = () => {
+  //   setaddVisible(true);
+  // };
 
   const updateState = (e) => {
     setSeachValue(e.target.value);

@@ -87,7 +87,7 @@ export default function AuthList() {
 
   //权限数据更新
   const updateData = async (data) => {
-    let res = await updateAuthData(rowid, { title: data.title });
+   await updateAuthData(rowid, { title: data.title });
     getAuthData();
     seteditAddVisible(false);
     formRef1.current.resetFields(); //修改成功后清空输入框中的数据
@@ -98,9 +98,9 @@ export default function AuthList() {
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showAddDrawer = () => {
-    setaddVisible(true);
-  };
+  // const showAddDrawer = () => {
+  //   setaddVisible(true);
+  // };
 
   const updateState = (e) => {
     setSeachValue(e.target.value.trim());

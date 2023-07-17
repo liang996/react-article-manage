@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import styleModule from "./Login.module.scss";
 import { getUserInfo } from "../../api/asyncVersion/user";
 export default class Login extends Component {
+
   state = {
     username: "",
     password: "",
@@ -161,9 +162,9 @@ export default class Login extends Component {
   };
 
   //粒子被正确加载到画布中时，这个函数被调用
-  particlesLoaded = (container) => {
-    console.log("123", container);
-  };
+  // particlesLoaded = (container) => {
+  //   console.log("123", container);
+  // };
 
   saveFormData = (dataType) => {
     return (e) => {
@@ -172,7 +173,6 @@ export default class Login extends Component {
   };
   isLogin = async () => {
     const { username, password } = this.state;
-    let user = JSON.parse(localStorage.getItem("userData")) || {};
 
     //判断输入内容是否为空
     if (username.trim() === "" || password.trim() === "") {
@@ -180,24 +180,13 @@ export default class Login extends Component {
 
       return; //拦截
     } else {
-      // //传递search参数
-      // this.props.history.push(
-      //   `/home?username=${username}&password=${password}`
-      // );
-      //传递query参数
-
-      // this.props.history.push({
-      //   pathname: "/home",
-      //   query: { username, password },
-      // });
       let userData = await getUserInfo(
         `?username=${username}&password=${password}&roleState=true&_expand=role`
       );
-      if (userData.length === 0||Object.keys(user).length === 0 ) {
-        message.error("您还未注册，请先注册");
-        return; //拦截
-      } else if(userData.length !== 0&&Object.keys(user).length > 0 ){
+      console.log("userData", userData);
+      if (userData.length !== 0) {
         localStorage.setItem("token", nanoid());
+        localStorage.setItem("userInfoData", JSON.stringify(userData[0]));
 
         //传递state参数
         this.props.history.push({
@@ -205,6 +194,9 @@ export default class Login extends Component {
           state: { username, password },
         });
         // props.history.push("/")
+      } else {
+        message.error("您还未注册，请先注册");
+        return; 
       }
     }
   };
@@ -214,7 +206,7 @@ export default class Login extends Component {
         <Particles
           id="tsparticles"
           init={this.particlesInit}
-          loaded={this.particlesLoaded}
+        
           options={this.state.options}
         />
         <div className={styleModule["login-wrapper"]}>

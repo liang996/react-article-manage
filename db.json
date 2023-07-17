@@ -131,8 +131,19 @@
       "roleState": true,
       "default": false,
       "id": 11
+    },
+    {
+      "username": "liang",
+      "password": "admin1231",
+      "age": 65,
+      "sex": 1,
+      "phone": "18207211012",
+      "roleState": true,
+      "address": "重庆",
+      "roleId": 3,
+      "default": false,
+      "id": 12
     }
-    
   ],
   "articles": [
     {

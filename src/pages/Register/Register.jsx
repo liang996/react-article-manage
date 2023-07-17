@@ -164,9 +164,9 @@ export default class register extends Component {
   };
 
   //粒子被正确加载到画布中时，这个函数被调用
-  particlesLoaded = (container) => {
-    console.log("123", container);
-  };
+  // particlesLoaded = (container) => {
+  //   console.log("123", container);
+  // };
   isRegister = async () => {
     const { username, password } = this.state;
     //判断输入内容是否为空
@@ -194,9 +194,19 @@ export default class register extends Component {
         //Math.floor(Math.random()*10)可均衡获取 0 到 9 的随机整数。
         // Math.random()>0.5?1:0; 可均衡获取 0 or 1 的随机整数。
         //Math.floor(Math.random() * (100 - 0)) + 0  可均衡获取 0 到 100 的随机整数。
-        const addressArr = ['北京','武汉','成都','重庆','深圳','郑州','黄石','宁波','西安'];
+        const addressArr = [
+          "北京",
+          "武汉",
+          "成都",
+          "重庆",
+          "深圳",
+          "郑州",
+          "黄石",
+          "宁波",
+          "西安",
+        ];
 
-        const item = addressArr[Math.floor(Math.random()*addressArr.length)];
+        const item = addressArr[Math.floor(Math.random() * addressArr.length)];
         await addUserData({
           username,
           password,
@@ -217,10 +227,10 @@ export default class register extends Component {
   render() {
     return (
       <div className={styleModule.container}>
+          {/* loaded={this.particlesLoaded} */}
         <Particles
           id="tsparticles"
           init={this.particlesInit}
-          loaded={this.particlesLoaded}
           options={this.state.options}
         />
         <div className={styleModule["register-wrapper"]}>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  getUserList,
   delUserData,
   updateUserData,
   addUserData,
@@ -15,12 +14,9 @@ import {
   Popconfirm,
   Button,
   Input,
-  Form,
   Drawer,
   message,
   Switch,
-  Radio,
-  Select,
 } from "antd";
 
 export default function UserManage() {
@@ -62,7 +58,7 @@ export default function UserManage() {
   //用户数据添加
   const addUser = () => {
     formRef.current.validateFields().then(async (res) => {
-      let addData = await addUserData({
+      await addUserData({
         ...res,
         roleState: true,
         default: false,

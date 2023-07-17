@@ -81,4 +81,3 @@ https://blog.csdn.net/weixin_54127208/article/details/124380211
 ## 问题记录
 1.暂时权限列表控制子目录，不起作用
 2.ResizeObserver loop limit exceeded 删除功能偶尔会报
-3.注册用户成功后，用该用户登录，jsonserver服务会更新不及时，目前用db.json配置好登录的没有问题
