@@ -1,15 +1,7 @@
-import React, { Fragment, useState, useRef } from "react";
-import {
-  PageHeader,
-  Steps,
-  Button,
-  Form,
-  Input,
-  Select,
-  message,
-  notification,
-} from "antd";
-import "./index.module.css";
+import React, { Fragment, useState, useRef, useEffect } from "react";
+import { PageHeader, Steps, Button, Form, Input, Select, message } from "antd";
+import { getCategoryList } from "../../../api/asyncVersion/category";
+import style from "./index.module.css";
 const { Option } = Select;
 export default function ArticleAdd() {
   const [current, setCurrent] = useState(0);
@@ -20,7 +12,16 @@ export default function ArticleAdd() {
   const [categories, setCategories] = useState([]);
   const [formMsg, setFormMsg] = useState({});
   //文本框的数据
-  const [content, setContent] = useState("");
+  const [describe, setDescribe] = useState("");
+  useEffect(() => {
+    getCategoryData();
+  }, []);
+  //请求类别数据
+
+  const getCategoryData = async () => {
+    let res = await getCategoryList();
+    setCategories(res);
+  };
 
   const nextStep = () => {
     //点击下一步时，如果此时是第0项，则收集表单数据
@@ -36,9 +37,10 @@ export default function ArticleAdd() {
           //console.log(error);
         });
     } else {
-      if (content === "" || content.trim() === "<p></p>")
-        message.error("文章内容不能为空!");
-      else setCurrent(current + 1);
+      // if (describe === "" || describe.trim() === "<p></p>")
+      //   message.error("文章内容不能为空!");
+      // else
+       setCurrent(current + 1);
     }
   };
   const lastStep = () => {
@@ -69,7 +71,10 @@ export default function ArticleAdd() {
         ]}
       />
       {/* 变化部分 */}
-      <div style={{ marginTop: "70px" }}>
+      <div
+        style={{ marginTop: "70px" }}
+        className={current === 0 ? "" : style.hidden}
+      >
         {/* 表单 */}
         <Form name="control-hooks" ref={articleRef}>
           <Form.Item
@@ -94,14 +99,20 @@ export default function ArticleAdd() {
           </Form.Item>
         </Form>
       </div>
-      <div style={{ marginTop: "70px" }}>
+      <div
+        style={{ marginTop: "70px" }}
+        className={current === 1 ? "" : style.hidden}
+      >
         {/* 文本编辑器 */}
         {/* {
                     checkEditor()
                 } */}
         1111
       </div>
-      <div style={{ marginTop: "70px" }}></div>
+      <div
+        style={{ marginTop: "70px" }}
+        className={current === 2 ? "" : style.hidden}
+      ></div>
       <div style={{ marginTop: "50px" }}>
         {current > 0 && (
           <span>
