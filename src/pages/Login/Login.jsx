@@ -181,7 +181,8 @@ export default class Login extends Component {
       return; //拦截
     } else {
       let userData = await getUserInfo(
-        `?username=${username}&password=${password}&roleState=true&_expand=role`
+        `?username=${username}&password=${password}&roleState=true&_expand=role` 
+
       );
       console.log("userData", userData);
       if (userData.length !== 0) {

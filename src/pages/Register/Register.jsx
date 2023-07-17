@@ -184,8 +184,8 @@ export default class register extends Component {
         `?username=${username}&password=${password}&roleState=true&_expand=role`
       );
       console.log("userData", userData);
-
-      if (userData[0]?.username === username) {
+ //校验输入的账号密码是否和数据库的账号密码是否一致
+      if (userData[0]?.username === username &&userData[0]?.password === password) {
         message.error("当前用户已被注册使用,请前往登录");
         localStorage.setItem("userData", JSON.stringify(data));
 
