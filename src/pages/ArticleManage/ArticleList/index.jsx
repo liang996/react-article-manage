@@ -51,7 +51,7 @@ export default function ArticleList() {
   const getListData = async () => {
     //json-serevr高级用法（表关联查询）：_expand ,如通过文章表获取用户表数据
     // users：用户表 使用_expand为向上关联得用user
-await getList("?_expand=user");
+    await getList("?_expand=user");
   };
   //文章数据添加
   const addArticle = async () => {
@@ -60,7 +60,7 @@ await getList("?_expand=user");
       author: "姜帆",
       describe: nanoid(),
     };
-   await addArticleData(data);
+    await addArticleData(data);
     getArticleData();
     setaddVisible(false);
     formRef.current.resetFields(); //修改成功后清空输入框中的数据
@@ -70,8 +70,8 @@ await getList("?_expand=user");
 
   //文章数据删除
   const deleteData = async (data) => {
-await delArticleData(data.id);
-    setArticleData(articleData.filter((r) => r.id !== data.id))
+    await delArticleData(data.id);
+    setArticleData(articleData.filter((r) => r.id !== data.id));
 
     getArticleData();
     //console.log("文章数据删除", res);
@@ -79,7 +79,7 @@ await delArticleData(data.id);
 
   //文章数据更新
   const updateData = async (data) => {
- await updateArticleData(rowid, { title: data.title });
+    await updateArticleData(rowid, { title: data.title });
 
     getArticleData();
     seteditAddVisible(false);
@@ -91,7 +91,7 @@ await delArticleData(data.id);
     message.error("按照格式要求输入");
   };
   //显示新增信息抽屉
-  const showDrawer = () => {
+  const showAddDrawer = () => {
     setaddVisible(true);
   };
 
@@ -125,7 +125,7 @@ await delArticleData(data.id);
   };
 
   //显示修改信息抽屉
-  const showDrawer1 = (r) => {
+  const showEditDrawer = (r) => {
     seteditAddVisible(true);
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
@@ -164,11 +164,46 @@ await delArticleData(data.id);
       key: "describe",
     },
     {
+      title: "访问量",
+      dataIndex: "view",
+      key: "view",
+    },
+    {
+      title: "点赞量",
+      dataIndex: "star",
+      key: "star",
+    },
+
+    {
+      title: "审核状态",
+      dataIndex: "auditState",
+      key: "auditState",
+      render: (_, { auditState }) => <>{auditState === 0 ? "未审核" :auditState === 1 ? "审核中" :"审核通过"}</>,
+
+    },
+    {
+      title: "发布状态",
+      dataIndex: "publishState",
+      key: "publishState",
+      render: (_, { auditState }) => <>{auditState === 0 ? "未发布" :auditState === 1 ? "待发布" :auditState === 2 ? "已发布" :"已下架"}</>,
+
+    },
+    {
+      title: "创建时间",
+      dataIndex: "createTime",
+      key: "createTime",
+    },
+    {
+      title: "发布时间",
+      dataIndex: "publishTime",
+      key: "publishTime",
+    },
+    {
       title: "操作",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={showDrawer1.bind(this, record)}>修改</a>
+          <a onClick={showEditDrawer.bind(this, record)}>修改</a>
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -198,15 +233,19 @@ await delArticleData(data.id);
         <Button style={{ marginLeft: "10px" }} type="primary" onClick={queryfn}>
           查询
         </Button>
-        <Button
+        {/* <Button
           type="primary"
           style={{ marginLeft: "10px" }}
-          onClick={showDrawer.bind(this)}
+          onClick={showAddDrawer.bind(this)}
         >
           添加信息
-        </Button>
+        </Button> */}
       </div>
-      <Table columns={columns} dataSource={articleData}  rowKey={(item)=>item.id}  />
+      <Table
+        columns={columns}
+        dataSource={articleData}
+        rowKey={(item) => item.id}
+      />
       <Drawer title="添加文章信息" onClose={onClose} open={addVisible}>
         <Form
           ref={formRef}

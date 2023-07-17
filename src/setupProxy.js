@@ -17,6 +17,11 @@ module.exports = function (app) {
       changeOrigin: true,
       pathRewrite: { '^/duanzi': '' }
     }),
+    createProxyMiddleware('/weathers', {
+      target: 'https://geoapi.qweather.com',
+      changeOrigin: true,
+      pathRewrite: { '^/weathers': '' }
+    }),
     createProxyMiddleware('/wen', {
       target: 'http://localhost:8001',
       changeOrigin: true,
