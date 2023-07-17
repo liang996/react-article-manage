@@ -76,8 +76,17 @@ npm  run  eject
 ```
 https://blog.csdn.net/weixin_54127208/article/details/124380211
 ```
-
+##  权限功能表关联简述
+```
+1.先有菜单表 （catalogues），子菜单关联父菜单（children）
+2.权限数据其实就是菜单表及子菜单表数据的集合 
+3.角色表又关联着权限数据 （先给角色授权）
+4.用户表又关联着角色表数据  （在给用户赋予角色）
+```
 ```
 ## 问题记录
 1.暂时权限列表控制子目录，不起作用
 2.ResizeObserver loop limit exceeded 删除功能偶尔会报
+
+ 
+```

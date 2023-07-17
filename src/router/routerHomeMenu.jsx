@@ -39,10 +39,13 @@ function RouterHomeMenu() {
     console.log("请求子菜单数据,,,,3,,,,,,,", MenuSonList);
     setSaveRouterList([...MenuList, ...MenuSonList]);
   };
-
+  //判断路由开关是否开启
   const checkRouter = (item) => {
+    console.log("auth", item.auth);
     return routerList[item.key] && item.auth;
   };
+  //key：页面路径（页面路由）
+  //判断当前用户权限列表是否包含页面路径
   const checkUserRights = (item) => {
     return saveUser.role.rights.includes(item.key);
   };
