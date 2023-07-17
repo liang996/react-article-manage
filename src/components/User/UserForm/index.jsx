@@ -11,13 +11,11 @@ const UserForm = forwardRef((props, ref) => {
     onClose,
     isUpData,
     SelectChange,
-    saveCurrentUser
+    saveCurrentUser,
   } = props;
   console.log("props", props);
 
   const decisionRoleDisabled = (item) => {
-    console.log("saveCurrentUser", saveCurrentUser);
-
     if (isUpData) {
       if (saveCurrentUser?.roleId * 1 === 1) {
         return false;

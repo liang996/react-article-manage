@@ -354,7 +354,7 @@
       "label": "角色列表",
       "icon": null,
       "catalogueId": 7,
-      "auth": 0,
+      "auth": 1,
       "key": "/auth-manage/role/List"
     }
   ]

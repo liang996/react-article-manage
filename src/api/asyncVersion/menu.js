@@ -8,3 +8,7 @@ export const getMenuList = () => {
 export const getList = (params) => {
     return fetchData(`/catalogues${params}`)
 };
+// 子目录列表查询
+export const getMenuSonList = () => {
+    return fetchData("/children")
+};
