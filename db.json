@@ -237,6 +237,7 @@
       "rights": [
         "/home",
         "/weather-manage",
+        "/user-manage",
         "/article-manage",
         "/article-manage/article/list",
         "/publish-manage",
@@ -252,6 +253,7 @@
       "rights": [
         "/home",
         "/weather-manage",
+        "/user-manage",
         "/article-manage"
       ]
     }

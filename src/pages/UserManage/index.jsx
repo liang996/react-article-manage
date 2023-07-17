@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { nanoid } from "nanoid";
+
 import {
   delUserData,
   updateUserData,
@@ -27,6 +29,7 @@ export default function UserManage() {
   const [addVisible, setAddVisible] = useState(false);
   const [editaddVisible, setEditAddVisible] = useState(false);
   const [seachValue, setSeachValue] = useState("");
+  const saveCurrentUser = JSON.parse(localStorage.getItem("userInfoData"));
 
   const [rowid, setRowid] = useState(null);
   let formRef1 = useRef();
@@ -39,7 +42,19 @@ export default function UserManage() {
   //通过用户查关联的角色信息
   const getUserArticlesData = async () => {
     let res = await getList("?_expand=role");
-    setUserData(res);
+
+    setUserData(
+      // roleId为1.超级管理员 2普通管理员 3 普通用户
+      saveCurrentUser.roleId === 1
+        ? res
+        : [
+            ...res.filter((item) => item.username === saveCurrentUser.username),
+            ...res.filter(
+              (item) =>
+                item.region === saveCurrentUser.region && item.roleId === 3
+            ),
+          ]
+    );
   };
   //请求角色数据
 
@@ -204,6 +219,7 @@ export default function UserManage() {
     {
       title: "操作",
       key: "action",
+
       render: (_, record) => (
         <Space size="middle">
           <Button
@@ -270,10 +286,12 @@ export default function UserManage() {
         <UserForm
           roleData={roleData}
           ref={isUpData ? formRef1 : formRef}
+          isUpData={isUpData}
           onFinish={isUpData ? updateUser : addUser}
           onFinishFailed={onFinishFailed}
           onClose={isUpData ? onEditClose : onAddClose}
           SelectChange={SelectChange}
+          saveCurrentUser={saveCurrentUser}
         />
       </Drawer>
     </div>

@@ -1,13 +1,37 @@
 import React, { forwardRef } from "react";
+
 import { Button, Input, Form, Radio, Select } from "antd";
+const { Option } = Select;
+
 const UserForm = forwardRef((props, ref) => {
   const {
     roleData,
     onFinish,
     onFinishFailed,
     onClose,
+    isUpData,
     SelectChange,
+    saveCurrentUser
   } = props;
+  console.log("props", props);
+
+  const decisionRoleDisabled = (item) => {
+    console.log("saveCurrentUser", saveCurrentUser);
+
+    if (isUpData) {
+      if (saveCurrentUser?.roleId * 1 === 1) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (saveCurrentUser?.roleId * 1 === 1) {
+        return false;
+      } else {
+        return item.roleType !== 3;
+      }
+    }
+  };
   return (
     <Form
       ref={ref}
@@ -65,13 +89,22 @@ const UserForm = forwardRef((props, ref) => {
         label="角色"
         rules={[{ required: true, message: "请选择" }]}
       >
-        <Select onChange={SelectChange} options={roleData} />
+        <Select onChange={SelectChange}>
+          {roleData.map((item) => (
+            <Option
+              disabled={decisionRoleDisabled(item)}
+              key={item.id}
+              value={item.id}
+            >
+              {item.roleName}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
       <Button onClick={onClose.bind(this)}>取消</Button>
       <Button htmlType="submit" type="primary">
         完成
       </Button>
-   
     </Form>
   );
 });
