@@ -1,11 +1,15 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
-import { PageHeader, Steps, Button, Form, Input, Select, message } from "antd";
+import { PageHeader, Steps, Button, Form, Input, Select, message,notification } from "antd";
 import ArticleEditor from "../../../components/ArticleEditor";
-// import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { getCategoryList } from "../../../api/asyncVersion/category";
+import { addArticleData } from "../../../api/asyncVersion/article";
+
 import style from "./index.module.css";
 const { Option } = Select;
 export default function ArticleAdd(props) {
+  //当前用户信息
+  let currentUser = JSON.parse(localStorage.getItem("userInfoData"));
+
   const [current, setCurrent] = useState(0);
   const articleRef = useRef(null);
   //编辑文章的状态
@@ -37,10 +41,11 @@ export default function ArticleAdd(props) {
           //console.log(error);
         });
     } else {
+      console.log(formMsg, describe);
+
       if (describe === "" || describe.trim() === "<p></p>")
         message.error("文章内容不能为空!");
-      else
-      setCurrent(current + 1);
+      else setCurrent(current + 1);
     }
   };
   const lastStep = () => {
@@ -49,8 +54,35 @@ export default function ArticleAdd(props) {
   const onValueChange = (value) => {
     setDescribe(value);
   };
-  const saveArticleInfo = (auditState) => {
-    console.log("auditState :>> ", auditState);
+  const saveArticleInfo = async (auditState) => {
+    let res = await addArticleData({
+      ...formMsg,
+      userId: currentUser.id,
+      author: currentUser.username,
+      describe,
+      star: 0,
+      view: 0,
+      roleId: currentUser.roleId,
+      createTime: +new Date(),
+      publishTime: 0,
+      auditState,
+      // publishState: 0,
+    });
+    //
+    if(Object.keys(res).length>0){
+    notification.info({
+      message: "通知",
+      description:
+          `您可以在${auditState ? "审核列表" : "草稿箱"}中查看您的新闻!`,
+      placement: "bottomRight",
+  });
+  if (auditState)
+      props.history.push("/examine-manage/examine/list")
+  else
+      props.history.push("/article-manage/drafts/list")
+}
+
+
   };
   return (
     <Fragment>

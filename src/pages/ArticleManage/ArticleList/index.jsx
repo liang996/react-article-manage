@@ -159,11 +159,6 @@ export default function ArticleList() {
       key: "author",
     },
     {
-      title: "文章描述",
-      dataIndex: "describe",
-      key: "describe",
-    },
-    {
       title: "访问量",
       dataIndex: "view",
       key: "view",

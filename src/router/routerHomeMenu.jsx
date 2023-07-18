@@ -8,18 +8,21 @@ import Home from "../pages/Home";
 import ArticleList from "../pages/ArticleManage/ArticleList";
 import ArticleAdd from "../pages/ArticleManage/ArticleAdd";
 import CategoryList from "../pages/ArticleManage/CategoryList";
+import DraftsList from "../pages/ArticleManage/DraftsList";
 
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import AuthList from "../pages/AuthManage/AuthList";
 import RoleList from "../pages/AuthManage/RoleList";
 import ExamineList from "../pages/ExamineManage/ExamineList";
 import PublishList from "../pages/PublishManage/PublishList";
+
 const routerList = {
   "/weather-manage": Weather,
   "/user-manage": UserManage,
   "/article-manage/article/list": ArticleList,
   "/article-manage/article/add": ArticleAdd,
   "/article-manage/category/list": CategoryList,
+  "/article-manage/drafts/list": DraftsList,
   "/publish-manage/publish/list": PublishList,
   "/examine-manage/examine/list": ExamineList,
   "/auth-manage/auth/List": AuthList,
