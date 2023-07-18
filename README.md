@@ -10,8 +10,6 @@
 
 > 传送门：[个人 🙅‍♂ 博客](https://liang996.github.io/)
 
-
-
 ## 项目所用技术栈 ：
 
 文章管理系统集成技术栈有
@@ -97,17 +95,16 @@ https://blog.csdn.net/qq_46105844/article/details/125933947
  https://blog.csdn.net/weixin_48813932/article/details/124624103
 ```
 
-## 【前端 react 粒子特效】使用  react-tsparticles  tsparticles
+## 【前端 react 粒子特效】使用 react-tsparticles tsparticles
 
 ```
 1.https://blog.csdn.net/weixin_54127208/article/details/124380211
 2.配置 https://blog.csdn.net/echozly/article/details/122296158
 ```
 
-## 进度条插件- Nprogress使用
+## 进度条插件- Nprogress 使用
 
- 在很多网页的加载过程中，顶部都会展示一个进度条来显示加载进度。Nprogress 就是一款非常方便的进度条插件
-1.首先安装 nprogress(咱直接用 npm 安装了)
+在很多网页的加载过程中，顶部都会展示一个进度条来显示加载进度。Nprogress 就是一款非常方便的进度条插件 1.首先安装 nprogress(咱直接用 npm 安装了)
 
 ```
 npm install --save nprogress
@@ -135,6 +132,7 @@ import 'nprogress/nprogress.css';   //引入样式
 3.角色表又关联着权限数据 （先给角色授权）
 4.用户表又关联着角色表数据  （在给用户赋予角色）
 ```
+
 ## 问题记录
 
 ```
@@ -143,17 +141,41 @@ import 'nprogress/nprogress.css';   //引入样式
 ```
 
 ## 和风天气
+
 ```
 https://devapi.qweather.com/v7/weather/3d?location=101020100&key=535627da54754fbd880efed958e8d831 查天气
 
 https://geoapi.qweather.com/v2/city/lookup?location=%E4%B8%8A%E6%B5%B7&key=535627da54754fbd880efed958e8d831 查城市
 https://dev.qweather.com/docs/api/weather/weather-daily-forecast/   查和风天气文档
-``` 
-## Day.js使用
-dayjs是一个轻量的处理时间和日期的 JavaScript 库
+```
 
-官方github https://github.com/iamkun/dayjs
+## Day.js 使用
+
+dayjs 是一个轻量的处理时间和日期的 JavaScript 库
+
+官方 github https://github.com/iamkun/dayjs
 
 中文使用文档 https://github.com/iamkun/dayjs/blob/master/docs/zh-cn/API-reference.md
 
-##  CSS的简写属性
+##  React-Quill 是基于 Quill.js 开发的组件，提供了一个简洁易用的富文本编辑器。
+
+
+```js
+import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+ 
+function MyEditor() {
+  const [content, setContent] = useState("");
+ 
+  function onContentChange(value) {
+    setContent(value);
+  }
+ 
+  return (
+    <div>
+      <ReactQuill value={content} onChange={onContentChange} />
+    </div>
+  );
+}
+```

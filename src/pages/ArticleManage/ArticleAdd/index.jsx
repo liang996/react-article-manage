@@ -1,14 +1,14 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import { PageHeader, Steps, Button, Form, Input, Select, message } from "antd";
+import ArticleEditor from "../../../components/ArticleEditor";
+// import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { getCategoryList } from "../../../api/asyncVersion/category";
 import style from "./index.module.css";
 const { Option } = Select;
-export default function ArticleAdd() {
+export default function ArticleAdd(props) {
   const [current, setCurrent] = useState(0);
   const articleRef = useRef(null);
   //编辑文章的状态
-  const [articleInfo, setArticleInfo] = useState(null);
-
   const [categories, setCategories] = useState([]);
   const [formMsg, setFormMsg] = useState({});
   //文本框的数据
@@ -37,19 +37,21 @@ export default function ArticleAdd() {
           //console.log(error);
         });
     } else {
-      // if (describe === "" || describe.trim() === "<p></p>")
-      //   message.error("文章内容不能为空!");
-      // else
-       setCurrent(current + 1);
+      if (describe === "" || describe.trim() === "<p></p>")
+        message.error("文章内容不能为空!");
+      else
+      setCurrent(current + 1);
     }
   };
   const lastStep = () => {
     setCurrent(current - 1);
   };
+  const onValueChange = (value) => {
+    setDescribe(value);
+  };
   const saveArticleInfo = (auditState) => {
     console.log("auditState :>> ", auditState);
   };
-
   return (
     <Fragment>
       <PageHeader className="site-page-header" title="撰写文章" />
@@ -104,10 +106,7 @@ export default function ArticleAdd() {
         className={current === 1 ? "" : style.hidden}
       >
         {/* 文本编辑器 */}
-        {/* {
-                    checkEditor()
-                } */}
-        1111
+        <ArticleEditor onValueChange={onValueChange} value={describe} />
       </div>
       <div
         style={{ marginTop: "70px" }}
