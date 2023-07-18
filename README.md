@@ -147,4 +147,13 @@ import 'nprogress/nprogress.css';   //引入样式
 https://devapi.qweather.com/v7/weather/3d?location=101020100&key=535627da54754fbd880efed958e8d831 查天气
 
 https://geoapi.qweather.com/v2/city/lookup?location=%E4%B8%8A%E6%B5%B7&key=535627da54754fbd880efed958e8d831 查城市
-```
+https://dev.qweather.com/docs/api/weather/weather-daily-forecast/   查和风天气文档
+``` 
+## Day.js使用
+dayjs是一个轻量的处理时间和日期的 JavaScript 库
+
+官方github https://github.com/iamkun/dayjs
+
+中文使用文档 https://github.com/iamkun/dayjs/blob/master/docs/zh-cn/API-reference.md
+
+##  CSS的简写属性

@@ -2,22 +2,21 @@
   padding-top: 50px;
   display: flex;
   justify-content: center;
-
 }
-
 
 .wather header {
-
   text-align: center;
-
 }
+
 
 .list {
   display: flex;
-  justify-content: center;
+  font-size: 22px;
+
+  justify-content: space-evenly;
   list-style: none;
 }
 
 .list li {
-  margin: 15px 30px;
+  margin: 15px 0;
 }

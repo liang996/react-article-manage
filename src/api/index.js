@@ -18,7 +18,7 @@ export const getCityData = (params) => {
 // 天气列表查询(查天气) 使用和风天气api
 export const getWeatherData = (params) => {
     return instance.request({
-        url: "/weather/v7/weather/3d",
+        url: "/weather/v7/weather/7d",
         method: "GET",
         params
     });

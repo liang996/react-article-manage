@@ -15,7 +15,6 @@ import {
   Drawer,
   message,
 } from "antd";
-import { nanoid } from "nanoid";
 
 export default function CategoryList() {
   const [CategoryData, setCategoryData] = useState([]);
@@ -191,7 +190,7 @@ export default function CategoryList() {
           style={{ marginLeft: "10px" }}
           onClick={showAddDrawer.bind(this)}
         >
-          添加信息
+          添加类别
         </Button>
       </div>
       <Table
