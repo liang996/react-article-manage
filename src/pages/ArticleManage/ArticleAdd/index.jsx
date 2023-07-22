@@ -1,8 +1,21 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
-import { PageHeader, Steps, Button, Form, Input, Select, message,notification } from "antd";
+import {
+  PageHeader,
+  Steps,
+  Button,
+  Form,
+  Input,
+  Select,
+  message,
+  notification,
+} from "antd";
 import ArticleEditor from "../../../components/ArticleEditor";
 import { getCategoryList } from "../../../api/asyncVersion/category";
-import { addArticleData } from "../../../api/asyncVersion/article";
+import {
+  addArticleData,
+  getArticleInfo,
+  updateArticleData,
+} from "../../../api/asyncVersion/article";
 
 import style from "./index.module.css";
 const { Option } = Select;
@@ -13,14 +26,34 @@ export default function ArticleAdd(props) {
   const [current, setCurrent] = useState(0);
   const articleRef = useRef(null);
   //编辑文章的状态
+  const [articleData, setArticleData] = useState(null);
   const [categories, setCategories] = useState([]);
   const [formMsg, setFormMsg] = useState({});
   //文本框的数据
   const [describe, setDescribe] = useState("");
   useEffect(() => {
+    articleInfo();
     getCategoryData();
   }, []);
   //请求类别数据
+  const articleInfo = async () => {
+
+
+      if (props.match.params.id) {
+        let res = await getArticleInfo(
+          `${props.match.params.id}?_expand=category&_expand=role`
+        );
+        if (res&&Object.keys(res).length > 0) {
+
+        articleRef.current.setFieldsValue({
+          title: res.title,
+          categoryId: res.categoryId,
+        });
+        setArticleData(res);
+        setDescribe(res.describe);
+      }
+    }
+  };
 
   const getCategoryData = async () => {
     let res = await getCategoryList();
@@ -55,38 +88,64 @@ export default function ArticleAdd(props) {
     setDescribe(value);
   };
   const saveArticleInfo = async (auditState) => {
-    let res = await addArticleData({
-      ...formMsg,
-      userId: currentUser.id,
-      author: currentUser.username,
-      describe,
-      star: 0,
-      view: 0,
-      roleId: currentUser.roleId,
-      createTime: +new Date(),
-      publishTime: 0,
-      auditState,
-      // publishState: 0,
-    });
-    //
-    if(Object.keys(res).length>0){
-    notification.info({
-      message: "通知",
-      description:
-          `您可以在${auditState ? "审核列表" : "草稿箱"}中查看您的文章!`,
-      placement: "bottomRight",
-  });
-  if (auditState)
-      props.history.push("/examine-manage/examine/list")
-  else
-      props.history.push("/article-manage/drafts/list")
-}
-
-
+    //修改
+    if (props.match.params.id) {
+      let res = await updateArticleData(articleData.id, {
+        ...formMsg,
+        describe,
+        auditState,
+      });
+      //
+      if (Object.keys(res).length > 0) {
+        notification.info({
+          message: "通知",
+          description: `您可以在${
+            auditState ? "审核列表" : "草稿箱"
+          }中查看您的文章!`,
+          placement: "bottomRight",
+        });
+        if (auditState) props.history.push("/examine-manage/examine/list");
+        else props.history.push("/article-manage/drafts/list");
+      }
+    } else {
+      //添加
+      let res = await addArticleData({
+        ...formMsg,
+        userId: currentUser.id,
+        author: currentUser.username,
+        describe,
+        star: 0,
+        view: 0,
+        roleId: currentUser.roleId,
+        createTime: +new Date(),
+        publishTime: 0,
+        auditState,
+        publishState: 0,
+      });
+      //
+      if (Object.keys(res).length > 0) {
+        notification.info({
+          message: "通知",
+          description: `您可以在${
+            auditState ? "审核列表" : "草稿箱"
+          }中查看您的文章!`,
+          placement: "bottomRight",
+        });
+        if (auditState) props.history.push("/examine-manage/examine/list");
+        else props.history.push("/article-manage/drafts/list");
+      }
+    }
   };
   return (
     <Fragment>
-      <PageHeader className="site-page-header" title="撰写文章" />
+           {/* 固定头部 */}
+           {articleData === null ?
+                < PageHeader
+                    className="site-page-header" title="撰写文章" /> :
+                <PageHeader
+                    className="site-page-header" title="修改文章"
+                    onBack={() => window.history.back()} />
+            }
       <Steps
         current={1}
         items={[

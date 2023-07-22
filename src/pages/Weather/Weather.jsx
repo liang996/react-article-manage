@@ -126,7 +126,8 @@ export default class Weather extends Component {
                 最高温度：{items.tempMax} <br />
                 最低温度：{items.tempMin} <br />
                 风力等级：{items.windScaleDay} <br />
-                日落时间：{items.sunrise} <br />
+                日出时间：{items.sunrise} <br />
+                日落时间：{items.sunset} <br />
                 白天风向：{items.windDirDay} <br />
                 风力等级：{items.sunset} <br />
                 能见度：{items.vis} <br />

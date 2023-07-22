@@ -195,12 +195,12 @@
       "userId": 1,
       "roleId": 1,
       "categoryId": 1,
-      "describe": "json-server可以快速的模拟接口",
+      "describe": "<p>json-server可以快速的模拟接口</p>",
       "star": 1020,
       "view": 2065,
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
-      "auditState": 2,
+      "auditState": 1,
       "publishState": 2
     },
     {
@@ -320,50 +320,23 @@
       "createTime": 1615777743864,
       "publishTime": 1615778496314,
       "auditState": 2,
-      "publishState": 2,
+      "publishState": 0,
       "id": 9
     },
     {
-      "title": "Vue中自定义事件的 $event传参问题",
-      "categoryId": 1,
-      "userId": 1,
-      "author": "admin",
-      "describe": "<p>————————————————</p><p>版权声明：本文为CSDN博主「前端十年大佬」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</p><p>原文链接：https://blog.csdn.net/m0_60846621/article/details/121547203</p>",
-      "star": 0,
-      "view": 0,
-      "roleId": 1,
-      "createTime": 1690012680756,
-      "publishTime": 0,
-      "auditState": 0,
-      "id": 10
-    },
-    {
-      "title": "[Vue]点击事件获取元素本身及事件",
-      "categoryId": 2,
-      "userId": 1,
-      "author": "admin",
-      "describe": "<p>得到</p>",
-      "star": 0,
-      "view": 0,
-      "roleId": 1,
-      "createTime": 1690012697676,
-      "publishTime": 0,
-      "auditState": 0,
-      "id": 11
-    },
-    {
       "title": "文章标题",
-      "categoryId": 7,
+      "categoryId": 8,
       "userId": 1,
       "author": "admin",
-      "describe": "<p>呃呃呃</p>",
+      "describe": "<p>修改了哈</p>",
       "star": 0,
       "view": 0,
       "roleId": 1,
-      "createTime": 1690012719079,
+      "createTime": 1690034720605,
       "publishTime": 0,
-      "auditState": 0,
-      "id": 12
+      "auditState": 1,
+      "publishState": 0,
+      "id": 10
     }
   ],
   "roles": [
@@ -380,7 +353,7 @@
         "/article-manage/drafts/list",
         "/article-manage/article/add",
         "/article-manage/info/:id",
-        "/article-manage/upadte/:id",
+        "/article-manage/update/:id",
         "/publish-manage",
         "/publish-manage/publish/list",
         "/examine-manage",
@@ -403,7 +376,7 @@
         "/article-manage/article/list",
         "/article-manage/article/add",
         "/article-manage/info/:id",
-        "/article-manage/upadte/:id",
+        "/article-manage/update/:id",
         "/article-manage/drafts/list",
         "/article-manage/category/list",
         "/article-manage/article/add",
@@ -425,7 +398,7 @@
         "/article-manage/article/list",
         "/article-manage/drafts/list",
         "/article-manage/info/:id",
-        "/article-manage/upadte/:id",
+        "/article-manage/update/:id",
         "/article-manage/article/add"
       ]
     }

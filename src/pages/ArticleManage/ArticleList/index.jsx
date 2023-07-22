@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 import {
   getArticleList,
@@ -153,8 +153,9 @@ export default function ArticleList() {
       title: "文章标题",
       dataIndex: "title",
       key: "title",
-      render: (title, item) =>
-      <NavLink to={`/article-manage/info/${item.id}`}>{title}</NavLink>
+      render: (title, item) => (
+        <NavLink to={`/article-manage/info/${item.id}`}>{title}</NavLink>
+      ),
     },
     {
       title: "文章作者",
@@ -176,15 +177,31 @@ export default function ArticleList() {
       title: "审核状态",
       dataIndex: "auditState",
       key: "auditState",
-      render: (_, { auditState }) => <>{auditState === 0 ? "未审核" :auditState === 1 ? "审核中" :"审核通过"}</>,
-
+      render: (_, { auditState }) => (
+        <>
+          {auditState === 0
+            ? "未审核"
+            : auditState === 1
+            ? "审核中"
+            : "审核通过"}
+        </>
+      ),
     },
     {
       title: "发布状态",
       dataIndex: "publishState",
       key: "publishState",
-      render: (_, { auditState }) => <>{auditState === 0 ? "未发布" :auditState === 1 ? "待发布" :auditState === 2 ? "已发布" :"已下架"}</>,
-
+      render: (_, { auditState }) => (
+        <>
+          {auditState === 0
+            ? "未发布"
+            : auditState === 1
+            ? "待发布"
+            : auditState === 2
+            ? "已发布"
+            : "已下架"}
+        </>
+      ),
     },
     {
       title: "创建时间",
@@ -201,7 +218,8 @@ export default function ArticleList() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={showEditDrawer.bind(this, record)}>修改</a>
+          <NavLink to={`/article-manage/update/${record.id}`}>修改</NavLink>
+
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
@@ -265,7 +283,11 @@ export default function ArticleList() {
           </Button>
         </Form>
       </Drawer>
-      <Drawer title="修改文章信息" onAddClose={onEditClose} open={editaddVisible}>
+      <Drawer
+        title="修改文章信息"
+        onAddClose={onEditClose}
+        open={editaddVisible}
+      >
         <Form
           ref={formEditRef}
           onFinish={updateData}

@@ -11,6 +11,10 @@ export const getList = (params) => {
 export const getDraftsList = (params) => {
     return fetchData(`/articles${params}`)
 };
+//通过文章列表，筛选审核数据
+export const getExamineList = (params) => {
+    return fetchData(`/articles${params}`)
+};
 //文章添加
 export const addArticleData = (params) => {
     return postData("/articles",params)

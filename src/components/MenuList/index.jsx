@@ -30,7 +30,7 @@ function MenuList(props) {
 
   //根据数据遍历列表
   const checkAuth = (item) =>
-    item.auth === 1 && currentUser.role.rights.includes(item.key);
+    item.auth === 1  && currentUser.role.rights.includes(item.key);
 
   const renderMenu = (menuList) =>
     menuList.map((item) => {

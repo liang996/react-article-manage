@@ -173,6 +173,18 @@ export default function UserManage() {
   const SelectChange = (value) => {
     //console.log("value :>> ", value);
   };
+  //更新用户状态
+  const onChangeSwitch = async (record) => {
+    record.roleState = !record.roleState;
+    let res = await updateUserData(record.id, {
+      roleState: record.roleState,
+    });
+    
+    if (Object.keys(res).length > 0) {
+      setUserData([...userData]);
+    }
+    console.log("res", res);
+  };
 
   //关闭新增信息对话框
   const onAddClose = () => {
@@ -198,10 +210,12 @@ export default function UserManage() {
     },
     {
       title: "用户状态",
-      dataIndex: "roleState",
-      key: "roleState",
-      render: (roleState, item) => (
-        <Switch checked={roleState} disabled={item.default}></Switch>
+      render: (item) => (
+        <Switch
+          onChange={() => onChangeSwitch(item)}
+          disabled={item.default}
+          checked={item.roleState}
+        ></Switch>
       ),
     },
     {

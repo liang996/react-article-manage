@@ -10,7 +10,6 @@ import ArticleAdd from "../pages/ArticleManage/ArticleAdd";
 import ArticleInfo from "../components/ArticleInfo";
 import CategoryList from "../pages/ArticleManage/CategoryList";
 import DraftsList from "../pages/ArticleManage/DraftsList";
-
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import AuthList from "../pages/AuthManage/AuthList";
 import RoleList from "../pages/AuthManage/RoleList";
@@ -22,7 +21,7 @@ const routerList = {
   "/user-manage": UserManage,
   "/article-manage/article/list": ArticleList,
   "/article-manage/article/add": ArticleAdd,
-  "/article-manage/update/:id": ArticleInfo,
+  "/article-manage/update/:id": ArticleAdd,
   "/article-manage/info/:id": ArticleInfo,
   "/article-manage/category/list": CategoryList,
   "/article-manage/drafts/list": DraftsList,
@@ -52,7 +51,7 @@ function RouterHomeMenu() {
   };
   //判断路由开关是否开启
   const checkRouter = (item) => {
-    console.log("auth", item);
+    console.log("auth", item.routorauth);
     return routerList[item.key] && (item.auth || item.routorauth)
 
   };

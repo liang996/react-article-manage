@@ -16,8 +16,8 @@ export default function ArticleInfo(props) {
     let res = await getArticleInfo(
       `${props.match.params.id}?_expand=category&_expand=role`
     );
-    console.log("res :>> ", res);
-    setArticleInfo(res);
+      setArticleInfo(res);
+ 
   };
   return (
     <div>
