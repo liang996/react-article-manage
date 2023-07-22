@@ -29,18 +29,26 @@ function MenuList(props) {
   }, []);
 
   //根据数据遍历列表
-  const checkAuth = (item) =>
-    item.auth === 1 && currentUser.role.rights.includes(item.key);
+  const checkAuth = (item) => item.auth === 1 && (currentUser.role.rights).includes(item.key);
+  const renderMenu = (menuList) => {
+    return (
+      menuList &&
+      menuList.map((item) => {
+        if (!item.icon) {
+          item.icon = iconList[item.key];
+        }
+        //把只有一层都可以折叠的功能修复
+        if (item?.children?.length > 0 && checkAuth(item)) {
+          renderMenu(item.children);
+          return item;
+        } else if (checkAuth(item)) {
+          item.children = "";
+          return item;
+        }
+      })
+    );
+  };
 
-  const renderMenu = (menuList) =>
-    menuList.map((item) => {
-      if (item.children?.length > 0 && checkAuth(item)) {
-        renderMenu(item.children);
-        return item;
-      }
-      item.children = "";
-      return checkAuth(item) && item;
-    });
 
   //请求菜单数据
   const getMenuData = async () => {

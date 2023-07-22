@@ -73,7 +73,7 @@ export default function ArticleAdd(props) {
     notification.info({
       message: "通知",
       description:
-          `您可以在${auditState ? "审核列表" : "草稿箱"}中查看您的新闻!`,
+          `您可以在${auditState ? "审核列表" : "草稿箱"}中查看您的文章!`,
       placement: "bottomRight",
   });
   if (auditState)

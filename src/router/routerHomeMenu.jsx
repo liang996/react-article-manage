@@ -7,6 +7,7 @@ import Weather from "../pages/Weather/Weather";
 import Home from "../pages/Home";
 import ArticleList from "../pages/ArticleManage/ArticleList";
 import ArticleAdd from "../pages/ArticleManage/ArticleAdd";
+import ArticleInfo from "../components/ArticleInfo";
 import CategoryList from "../pages/ArticleManage/CategoryList";
 import DraftsList from "../pages/ArticleManage/DraftsList";
 
@@ -21,6 +22,8 @@ const routerList = {
   "/user-manage": UserManage,
   "/article-manage/article/list": ArticleList,
   "/article-manage/article/add": ArticleAdd,
+  "/article-manage/update/:id": ArticleInfo,
+  "/article-manage/info/:id": ArticleInfo,
   "/article-manage/category/list": CategoryList,
   "/article-manage/drafts/list": DraftsList,
   "/publish-manage/publish/list": PublishList,
@@ -49,8 +52,9 @@ function RouterHomeMenu() {
   };
   //判断路由开关是否开启
   const checkRouter = (item) => {
-    console.log("auth", item.auth);
-    return routerList[item.key] && item.auth;
+    console.log("auth", item);
+    return routerList[item.key] && (item.auth || item.routorauth)
+
   };
   //key：页面路径（页面路由）
   //判断当前用户权限列表是否包含页面路径

@@ -40,7 +40,7 @@ export default class Welcome extends Component {
   };
 
   render() {
-    const { value, modules,formats } = this.state;
+    const { modules,formats } = this.state;
 
     return (
         <ReactQuill

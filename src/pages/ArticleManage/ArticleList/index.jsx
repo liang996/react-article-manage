@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { NavLink } from 'react-router-dom'
+
 import {
   getArticleList,
   delArticleData,
@@ -26,8 +28,8 @@ export default function ArticleList() {
   const [seachValue, setSeachValue] = useState("");
 
   const [rowid, setRowid] = useState(null);
-  let formRef1 = useRef();
-  let formRef = useRef();
+  let formEditRef = useRef();
+  let formAddRef = useRef();
   useEffect(() => {
     getArticleData();
     getListData();
@@ -63,7 +65,7 @@ export default function ArticleList() {
     await addArticleData(data);
     getArticleData();
     setaddVisible(false);
-    formRef.current.resetFields(); //修改成功后清空输入框中的数据
+    formAddRef.current.resetFields(); //修改成功后清空输入框中的数据
 
     //console.log("res", res);
   };
@@ -83,17 +85,17 @@ export default function ArticleList() {
 
     getArticleData();
     seteditAddVisible(false);
-    formRef1.current.resetFields(); //修改成功后清空输入框中的数据
+    formEditRef.current.resetFields(); //修改成功后清空输入框中的数据
   };
 
   //新增、修改数据时提交失败时的提示信息
   const onFinishFailed = (errorInfo) => {
     message.error("按照格式要求输入");
   };
-  //显示新增信息抽屉
-  const showAddDrawer = () => {
-    setaddVisible(true);
-  };
+  // //显示新增信息抽屉
+  // const showAddDrawer = () => {
+  //   setaddVisible(true);
+  // };
 
   const updateState = (e) => {
     setSeachValue(e.target.value);
@@ -130,18 +132,18 @@ export default function ArticleList() {
     setRowid(r.id);
     //设置 0 毫秒延迟回显数据
     setTimeout(() => {
-      formRef1.current.setFieldsValue(r);
+      formEditRef.current.setFieldsValue(r);
     }, 0);
   };
 
   //关闭修改信息对话框
-  const onClose1 = () => {
+  const onEditClose = () => {
     seteditAddVisible(false);
     message.error("取消操作");
   };
 
   //关闭新增信息对话框
-  const onClose = () => {
+  const onAddClose = () => {
     setaddVisible(false);
 
     message.error("取消操作");
@@ -151,7 +153,8 @@ export default function ArticleList() {
       title: "文章标题",
       dataIndex: "title",
       key: "title",
-      render: (text) => <a>{text}</a>,
+      render: (title, item) =>
+      <NavLink to={`/article-manage/info/${item.id}`}>{title}</NavLink>
     },
     {
       title: "文章作者",
@@ -202,7 +205,7 @@ export default function ArticleList() {
           <Popconfirm
             title="确定要删除吗?"
             onConfirm={deleteData.bind(this, record)}
-            onCancel={onClose.bind(this)}
+            onCancel={onAddClose.bind(this)}
             okText="确定"
             cancelText="取消"
           >
@@ -241,9 +244,9 @@ export default function ArticleList() {
         dataSource={articleData}
         rowKey={(item) => item.id}
       />
-      <Drawer title="添加文章信息" onClose={onClose} open={addVisible}>
+      <Drawer title="添加文章信息" onAddClose={onAddClose} open={addVisible}>
         <Form
-          ref={formRef}
+          ref={formAddRef}
           onFinish={addArticle}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -256,15 +259,15 @@ export default function ArticleList() {
             <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
           </Form.Item>
 
-          <Button onClick={onClose.bind(this)}>取消</Button>
+          <Button onClick={onAddClose.bind(this)}>取消</Button>
           <Button htmlType="submit" type="primary">
             完成
           </Button>
         </Form>
       </Drawer>
-      <Drawer title="修改文章信息" onClose={onClose1} open={editaddVisible}>
+      <Drawer title="修改文章信息" onAddClose={onEditClose} open={editaddVisible}>
         <Form
-          ref={formRef1}
+          ref={formEditRef}
           onFinish={updateData}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -277,7 +280,7 @@ export default function ArticleList() {
             <Input placeholder="请输入" id="title" title="输入2-6位中文汉字" />
           </Form.Item>
 
-          <Button onClick={onClose1.bind(this)}>取消</Button>
+          <Button onClick={onEditClose.bind(this)}>取消</Button>
           <Button htmlType="submit" type="primary">
             完成
           </Button>

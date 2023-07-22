@@ -19,7 +19,10 @@ export const addArticleData = (params) => {
 export const delArticleData = (id) => {
     return deleteData(`/articles/${id}`)
 };
-
+//文章详情
+export const getArticleInfo = (id) => {
+    return fetchData(`/articles/${id}`)
+};
 //文章修改
 export const updateArticleData = (id,params) => {
     return patchData(`/articles/${id}`,params)

@@ -145,7 +145,7 @@
       "id": 12
     }
   ],
-  "categorys": [
+  "categories": [
     {
       "id": 1,
       "title": "前端",
@@ -324,43 +324,43 @@
       "id": 9
     },
     {
-      "title": "js中+new Date()",
+      "title": "Vue中自定义事件的 $event传参问题",
       "categoryId": 1,
       "userId": 1,
       "author": "admin",
-      "describe": "<p>UTC协调世界时 UTC - exact time now - Time.is</p><p>UTC时间格式为：YYYY-MM-DDThh:mm:ssZ。</p><p><br></p><p>例如，2022-11-11T12:00:00Z（为北京时间2022年11月11日20点0分0秒）。</p><p><br></p><p>目前UTC（Universal Time Coordinated）与GMT（格林威治时间） 相差为0.9秒，故二者可以基本视为一致。</p><p><br></p><p>在日期-时间字符串中省略 T 或 Z，在不同浏览器中会产生不同结果。</p><p>————————————————</p><p>版权声明：本文为CSDN博主「smart_dream」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</p><p>原文链接：https://blog.csdn.net/xiaoxiong_jiaxin/article/details/125892381</p>",
+      "describe": "<p>————————————————</p><p>版权声明：本文为CSDN博主「前端十年大佬」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</p><p>原文链接：https://blog.csdn.net/m0_60846621/article/details/121547203</p>",
       "star": 0,
       "view": 0,
       "roleId": 1,
-      "createTime": 1689670203492,
+      "createTime": 1690012680756,
       "publishTime": 0,
       "auditState": 0,
       "id": 10
     },
     {
-      "title": "js中+new Date()",
+      "title": "[Vue]点击事件获取元素本身及事件",
       "categoryId": 2,
       "userId": 1,
       "author": "admin",
-      "describe": "<p>111</p>",
+      "describe": "<p>得到</p>",
       "star": 0,
       "view": 0,
       "roleId": 1,
-      "createTime": 1689670938165,
+      "createTime": 1690012697676,
       "publishTime": 0,
       "auditState": 0,
       "id": 11
     },
     {
-      "title": "js中+new Date()",
-      "categoryId": 1,
+      "title": "文章标题",
+      "categoryId": 7,
       "userId": 1,
       "author": "admin",
-      "describe": "<p>1</p>",
+      "describe": "<p>呃呃呃</p>",
       "star": 0,
       "view": 0,
       "roleId": 1,
-      "createTime": 1689670997375,
+      "createTime": 1690012719079,
       "publishTime": 0,
       "auditState": 0,
       "id": 12
@@ -379,6 +379,8 @@
         "/article-manage/category/list",
         "/article-manage/drafts/list",
         "/article-manage/article/add",
+        "/article-manage/info/:id",
+        "/article-manage/upadte/:id",
         "/publish-manage",
         "/publish-manage/publish/list",
         "/examine-manage",
@@ -400,6 +402,8 @@
         "/article-manage",
         "/article-manage/article/list",
         "/article-manage/article/add",
+        "/article-manage/info/:id",
+        "/article-manage/upadte/:id",
         "/article-manage/drafts/list",
         "/article-manage/category/list",
         "/article-manage/article/add",
@@ -420,6 +424,8 @@
         "/article-manage",
         "/article-manage/article/list",
         "/article-manage/drafts/list",
+        "/article-manage/info/:id",
+        "/article-manage/upadte/:id",
         "/article-manage/article/add"
       ]
     }
@@ -498,6 +504,22 @@
       "icon": null,
       "auth": 1,
       "key": "/article-manage/article/add"
+    },
+    {
+      "id": 20,
+      "catalogueId": 4,
+      "label": "文章详情",
+      "icon": null,
+      "routorauth": 1,
+      "key": "/article-manage/info/:id"
+    },
+    {
+      "id": 21,
+      "catalogueId": 4,
+      "label": "文章更新",
+      "icon": null,
+      "routorauth": 1,
+      "key": "/article-manage/update/:id"
     },
     {
       "id": 17,
